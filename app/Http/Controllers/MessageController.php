@@ -51,7 +51,7 @@ class MessageController extends Controller
     }
 
 
-    // Delete Messages of User (Trashed Message)
+    // Delete Messages of User
 
     public function destroy($id)
     {
@@ -63,7 +63,7 @@ class MessageController extends Controller
     }
 
 
-    // Show All Trashed Messages of User
+    // Show All Trashed Messages
 
     public function trashedMessages()
     {
