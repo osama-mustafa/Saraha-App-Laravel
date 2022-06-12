@@ -30,7 +30,7 @@
                                 </div>
                             </li>
 
-                            @if (Auth::user()->admin)
+                            @if (Auth::user()->is_admin)
                                 <li class="nav-item">
                                     <a href="{{ route('users') }}" class="nav-link text-white"><i class="fas fa-users"></i> Users</a>
                                 </li>
