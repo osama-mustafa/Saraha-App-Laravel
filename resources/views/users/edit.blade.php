@@ -43,7 +43,7 @@
                         <label for="email">Email</label>
                         <input type="email" name="email" class="form-control" value="{{ $auth_user->email }}">
                     </div>
-                    <button type="submit" class="btn btn-success">Update</button>
+                    <button type="submit" class="btn btn-dark">Update</button>
                 </form>        
             </div>
         </div>    

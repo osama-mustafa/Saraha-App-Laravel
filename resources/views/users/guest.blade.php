@@ -58,7 +58,7 @@
 
     <div class="container">
 
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-dark" role="alert">
             <h2 class="alert-heading">Sorry!</h2>
             <hr>
             <h3>You Cannot Send Private Saraha Messages to Yourself!</h3>
