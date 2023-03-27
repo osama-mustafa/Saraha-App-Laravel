@@ -6,7 +6,7 @@
         <div class="col-md-10">
             <div class="card">
                 
-                @if (Auth::user()->admin)
+                @if (auth()->user()->is_admin)
                 <div class="card-header">
                     <h3>Application Statistics</h3>
                 </div>
@@ -26,14 +26,14 @@
                         </h3>
                     @endauth
 
-                    @if (Auth::user()->admin)
+                    @if (auth()->user()->is_admin)
                     <hr>
                     <div class="row">
 
                         @if ($users->count() > 0)
-                        <div class="card bg-success mb-3 mr-2" style="max-width: 18rem;">
+                        <div class="card bg-dark mb-3 mr-2" style="max-width: 18rem;">
                             <div class="card-header text-white">
-                               <h4> <i class="fas fa-users"></i> All Registered Users </h4> 
+                               <h4> <i class="fas fa-users"></i> Registered Users </h4> 
                             </div>
                             <div class="card-body text-white">
                                 <h4 class="card-title">
@@ -46,9 +46,9 @@
                         @endif
     
                         @if ($messages->count() > 0) 
-                            <div class="card bg-success mb-3 mr-2" style="max-width: 20rem;">
+                            <div class="card bg-dark mb-3 mr-2" style="max-width: 20rem;">
                                 <div class="card-header text-white">
-                                    <h4><i class="fas fa-envelope"></i> All Messages</h4> 
+                                    <h4><i class="fas fa-envelope"></i> Messages</h4> 
                                 </div>
                                 <div class="card-body text-white">
                                     <h4 class="card-title">
