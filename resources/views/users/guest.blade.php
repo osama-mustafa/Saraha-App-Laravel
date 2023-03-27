@@ -38,7 +38,7 @@
                             <label for="message_body">Message</label>
                             <textarea name="message_body" id="message_body" cols="20" rows="10" class="form-control" placeholder="Leave a constructive message :)"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-success"><i class="fas fa-envelope"></i> Send Message</button>
+                        <button type="submit" class="btn btn-dark"><i class="fas fa-envelope"></i> Send Message</button>
                     </form>
                 </div>
 

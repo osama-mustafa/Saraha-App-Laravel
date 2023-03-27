@@ -8,7 +8,7 @@
             <div class="card-header">
                 <h3>Welcome   
                     <span class="font-weight-bold">{!! $auth_user->name !!}</span>  
-                    You have {{ $auth_user->messages->count() }} messages <i class="fas fa-envelope fa-sm"></i>
+                    You have {{ $auth_user->messages->count() }} {{ Str::plural('message', $auth_user->messages->count()) }} <i class="fas fa-envelope fa-sm"></i>
                 </h3>
             </div>
         @endauth
@@ -57,7 +57,7 @@
                             <label for="body">Message</label>
                             <textarea name="body" id="body" cols="20" rows="10" class="form-control"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-success">Send Message</button>
+                        <button type="submit" class="btn btn-dark">Send Message</button>
                     </form>
                 </div>
             @endguest --}}
@@ -73,7 +73,7 @@
                     @if ($auth_user->messages->count() > 0)
                         @foreach ($auth_user->messages as $message)
                         <div class="col-md-6">
-                            <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+                            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
                                 {{-- <div class="card-header">Message</div> --}}
                                 <div class="card-body">
                                 <h5 class="card-text">{{ $message->message_body }}</h5>

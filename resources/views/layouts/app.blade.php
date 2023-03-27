@@ -11,6 +11,7 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @auth
@@ -18,7 +19,7 @@
                                 <a href="{{ route('user.profile') }}" class="nav-link text-white"><i class="fas fa-envelope"></i> Your Messages</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('guest.profile', ['name' => $auth_user->name]) }}" class="nav-link text-white"><i class="fas fa-user-alt"></i> Public Profile</a>
+                                <a href="{{ route('guest.profile', ['name' => auth()->user()->name]) }}" class="nav-link text-white"><i class="fas fa-user-alt"></i> Public Profile</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

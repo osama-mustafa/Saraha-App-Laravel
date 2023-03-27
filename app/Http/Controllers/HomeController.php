@@ -27,12 +27,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $auth_user = Auth::user();
         $users     = User::all();
         $messages  = Message::all();
         return view('dashboard')->with([
-
-            'auth_user' => $auth_user,
             'users'     => $users,
             'messages'  => $messages
         ]);
