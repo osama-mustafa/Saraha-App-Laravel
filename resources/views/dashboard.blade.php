@@ -22,7 +22,7 @@
                     @auth 
                         {{ __('You are logged in!') }}
                         <h3 class="mt-2">
-                            <a href="{{ route('user.profile') }}" class="badge badge-success"><i class="fas fa-envelope"></i> Your Messages</a>
+                            <a href="{{ route('user.profile') }}" class="badge badge-dark"><i class="fas fa-envelope"></i> Your Messages</a>
                         </h3>
                     @endauth
 

@@ -1,7 +1,7 @@
 @include('include.header')
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-success shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-dark shadow-sm">
             <div class="container">
                 <a class="navbar-brand text-white" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
