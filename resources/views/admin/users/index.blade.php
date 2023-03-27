@@ -38,8 +38,8 @@
                     <td>{{ $user->messages->count() }}</td>
                     <td>
                         <a href="{{ route('edit.user', $user->id) }}" class="btn btn-dark btn-sm">
-                        <i class="fa fa-user-edit"></i>
-                        Edit
+                            <i class="fa fa-user-edit"></i>
+                            Edit
                         </a>
                     </td>
                     <td>
