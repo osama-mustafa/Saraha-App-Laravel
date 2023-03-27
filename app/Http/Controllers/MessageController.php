@@ -16,13 +16,10 @@ class MessageController extends Controller
     public function index()
     {
         $messages       = Message::withTrashed()->paginate(10);
-        $auth_user      = Auth::user();
         $users          = User::all();
 
-        return view ('admin.messages.messages')->with([
-
+        return view ('admin.messages.index')->with([
             'messages'  => $messages,
-            'auth_user' => $auth_user,
             'users'     => $users
         ]);
     }
