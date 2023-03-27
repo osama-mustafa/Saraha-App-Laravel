@@ -9,7 +9,7 @@
 
     <div class="col-md-10">
         <div class="card-header">
-            <h3 class="text-center">All Messages</h3>
+            <h3 class="text-center">Messages</h3>
         </div>
         @if ($messages->count() > 0)
             <table class="table table-responsive-sm table-hover">
@@ -48,7 +48,7 @@
                                 <form action="{{ route('user.delete.message', $message->id) }}" class="mb-3" method="POST">
                                     @csrf 
                                     @method('DELETE')
-                                    <button class="btn btn-danger ml-3"><i class="fas fa-trash"></i> Delete</button>
+                                    <button class="btn btn-dark btn-sm"><i class="fas fa-trash"></i> Delete</button>
                                 </form>    
                             </td>
                         </tr>
@@ -59,9 +59,10 @@
             <div>
                 {!! $messages->links() !!}
             </div>    
-        @endif  
-        <div>
-            There is no messages
-        </div>
+        @else  
+            <div>
+                There is no messages
+            </div>
+        @endif
     </div>
 </div>

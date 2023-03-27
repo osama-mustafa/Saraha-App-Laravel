@@ -15,7 +15,7 @@ class MessageController extends Controller
 
     public function index()
     {
-        $messages       = Message::withTrashed()->paginate(4);
+        $messages       = Message::withTrashed()->paginate(10);
         $auth_user      = Auth::user();
         $users          = User::all();
 
