@@ -14,7 +14,7 @@
     @endif
 
     <div class="card-header">
-        <h3 class="text-center">All Users</h3>
+        <h3 class="text-center">Users</h3>
     </div>
 
     <table class="table table-responsive-md table-hover">
@@ -22,52 +22,59 @@
             <tr>
                 <th>ID</th>
                 <th>Username</th>
-                <th>ِActive Messages</th>
+                <th>Active Messages</th>
                 <th>Edit</th>
                 <th>Delete</th>
                 <th>Admin</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($users as $user)
+            @foreach ($users as $index => $user)
                 <tr>
-                    <th scope="row">{{ $user->id }}</th>
+                    <th scope="row">{{ $index + 1 }}</th>
                     <td>
                        {{ $user->name }}
                     </td>
                     <td>{{ $user->messages->count() }}</td>
                     <td>
-                        <a href="{{ route('edit.user', $user->id) }}" class="btn btn-secondary">Edit</a>
+                        <a href="{{ route('edit.user', $user->id) }}" class="btn btn-dark btn-sm">
+                        <i class="fa fa-user-edit"></i>
+                        Edit
+                        </a>
                     </td>
                     <td>
                         <form action="{{ route('delete.user', $user->id) }}" method="POST">
                             @csrf 
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-dark btn-sm">
+                                <i class="fa fa-user-times"></i>
+                                Delete
+                            </button>
                         </form>
                     </td>
-                    @if ($user->admin == true)
-                    <td>
-                        <form action="{{ route('remove.admin', $user->id) }}" method="POST">
-                            @csrf
-                            {{-- @method('POST') --}}
-                            <button type="submit" class="btn btn-danger">Remove Admin</button>
-                        </form>
-                    </td>
-                    @endif
-                    {{-- @if ($user->admin == false)
+
+                    @if ($user->is_admin == true)
                         <td>
-                            <a href="{{ route('make.admin', $user->id) }}" class="btn btn-primary">Make Admin</a>
+                            <form action="{{ route('remove.admin', $user->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-dark btn-sm">
+                                    <i class="fa fa-lock"></i>
+                                    Remove Admin
+                                </button>
+                            </form>
                         </td>
-                    @endif --}}
-                    @if ($user->admin == false)
-                    <td>
-                        <form action="{{ route('make.admin', $user->id) }}" method="POST">
-                            @csrf
-                            {{-- @method('POST') --}}
-                            <button type="submit" class="btn btn-primary">Make Admin</button>
-                        </form>
-                    </td>
+                    @endif
+
+                    @if ($user->is_admin == false)
+                        <td>
+                            <form action="{{ route('make.admin', $user->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-dark btn-sm">
+                                    <i class="fa fa-lock-open"></i>
+                                    Make Admin
+                                </button>
+                            </form>
+                        </td>
                     @endif
                 </tr>
             @endforeach
