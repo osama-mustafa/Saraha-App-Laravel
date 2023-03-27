@@ -47,7 +47,7 @@
                         <label for="newpassword_confirmation">Confirm New Password</label>
                         <input type="password" name="newpassword_confirmation" class="form-control" placeholder="Confirm New Password">
                     </div>
-                    <button type="submit" class="btn btn-success">Update Password</button>
+                    <button type="submit" class="btn btn-dark">Update Password</button>
                 </form>        
             </div>
         </div>    

@@ -9,7 +9,7 @@ Saraha is a website application gives the ability to each registered user to rec
 - Clone the project
 - Run "composer update" in your terminal
 - Create .env file
-- Run 'php artisan key:genereate' in your terminal
+- Run "php artisan key:genereate" in your terminal
 - Create database in phpmyadmin and add it in your .env file
 - Run "php artisan migrate:fresh --seed" in your terminal
 - Use this credentials to access the app email: admin@saraha.com password: 12345678
