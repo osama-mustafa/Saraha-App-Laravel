@@ -19,7 +19,6 @@
                         <th>Message</th>
                         <th>Sent To</th>
                         <th>Sent At</th>
-                        <th>Status</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
@@ -34,18 +33,6 @@
                                 </a>
                             </td>
                             <td>{{ $message->created_at->toDateTimeString() }}</td>
-                            @if ($message->deleted_at == null)
-                            <td>
-                                Active Message
-                            </td>
-                            @endif
-
-                            @if ($message->deleted_at != null)
-                            <td>
-                                Deleted Message
-                            </td>
-                            @endif
-
                             <td>
                                 <form action="{{ route('user.delete.message', $message->id) }}" class="mb-3" method="POST">
                                     @csrf 

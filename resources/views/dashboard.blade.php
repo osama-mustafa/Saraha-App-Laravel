@@ -33,7 +33,7 @@
                         @if ($users->count() > 0)
                         <div class="card bg-dark mb-3 mr-2" style="max-width: 18rem;">
                             <div class="card-header text-white">
-                               <h4> <i class="fas fa-users"></i> Registered Users </h4> 
+                               <h4> <i class="fas fa-users"></i> Users</h4> 
                             </div>
                             <div class="card-body text-white">
                                 <h4 class="card-title">
