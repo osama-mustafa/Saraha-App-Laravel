@@ -28,7 +28,11 @@
                         <tr>
                             <td>{{ $index + 1 }}</td>
                             <td style="width: 25%">{{ $message->body }}</td>
-                            <td>{{ $message->user->name }}</td>
+                            <td>
+                                <a href="{{ route('edit.user', ['id' => $message->user_id]) }}">
+                                    {{ $message->user->name }}
+                                </a>
+                            </td>
                             <td>{{ $message->created_at->toDateTimeString() }}</td>
                             @if ($message->deleted_at == null)
                             <td>
