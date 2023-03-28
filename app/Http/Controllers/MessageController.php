@@ -14,7 +14,7 @@ class MessageController extends Controller
 
     public function index()
     {
-        $messages       = Message::withTrashed()->paginate(10);
+        $messages       = Message::paginate(10);
         $users          = User::all();
 
         return view ('admin.messages.index')->with([

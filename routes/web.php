@@ -85,7 +85,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/user/{id}/admin', [UserController::class, 'makeAdmin'])->name('make.admin');
     Route::post('/user/{id}/notadmin', [UserController::class, 'removeAdmin'])->name('remove.admin');
 
-    // Edit Profile Users For Admins
+    // Edit User
     Route::get('/user/{id}/edit', [UserController::class, 'editUserByAdmin'])->name('edit.user');
     Route::post('/user/{id}/update', [UserController::class, 'updateUserByAdmin'])->name('update.user');
 

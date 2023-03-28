@@ -33,19 +33,24 @@
                 <tbody>
                         @foreach ($messages as $message)
                             <tr>
-                                <td style="width: 25%">{{ $message->message_body }}</td>
-                                <td style="width: 25%">{{ $message->user->name }}</td>
+                                <td style="width: 25%">{{ $message->body }}</td>
+                                <td style="width: 25%">
+                                    <a href="{{ route('edit.user', ['id' => $message->user_id]) }}">{{ $message->user->name }}</a>
+                                </td>
                                 <td>
                                     <form action="{{ route('restore.messages', $message->id) }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="btn btn-success">Restore</button>
+                                        <button type="submit" class="btn btn-dark btn-sm">
+                                            <i class="fas fa-trash-restore"></i>
+                                            Restore
+                                        </button>
                                     </form>
                                 </td>
                                 <td>
                                     <form action="{{ route('force.delete.messages', $message->id) }}" class="mb-3" method="POST">
                                         @csrf 
                                         @method('DELETE')
-                                        <button class="btn btn-danger ml-3"><i class="fas fa-trash"></i> Delete</button>
+                                        <button class="btn btn-dark ml-3 btn-sm"><i class="fas fa-trash"></i> Delete</button>
                                     </form>    
                                 </td>
                             </tr>
