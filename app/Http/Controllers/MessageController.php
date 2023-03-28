@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreMessageRequest;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class MessageController extends Controller
 {
@@ -26,24 +25,17 @@ class MessageController extends Controller
 
     // Store Messages That Have Been Sent From Guests Or Profile Visitors to Registered USer
 
-    public function store(Request $request)
+    public function store(StoreMessageRequest $request)
     {
-        $request->validate([
-
-            'message_body'      => 'required|min:10|max:300',
+        $userId = User::where('name', request()->route('name'))->first()->id;
+        $validatedData = $request->validated();
+        Message::create([
+            'body' => $validatedData['body'],
+            'user_id' => $userId
         ]);
 
-        $message                 = new Message();
-        $message->message_body   = $request->message_body;
-        $name                      = request()->route('name');
-        $user                    = User::where('name', $name)->first();
-        $message->user_id        = $user->id;
-
-        $message->save();
         return redirect()->back()->with([
-
             'message_sent' => 'Your message has been sent .. Thank you for your honesty',
-            'user'         => $user
         ]);
     }
 

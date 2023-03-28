@@ -84,17 +84,17 @@
         <section>
             <div class="container mt-5" style="background-color: rgba(16, 187, 179, 0.11)">
                 <div class="row">
-                    <div class="col">
+                    <div class="col text-white" style="background-color: #323232;">
                        <h4 class="mt-3 mb-3">1- You Can Create Saraha Account Easily from <a href="{{ route('register') }}">HERE</a></h4><br>
                         Friends and others will write their personal and honest opinion about you at this link
                     </div>
 
-                    <div class="col">
+                    <div class="col text-white" style="background-color: #323232;">
                         <h4 class="mt-3 mb-3">2- You Can Share Your Public profile on Facebook, Twitter, LinkedIn, or Anywhere</h4> <br>
                         The messages you receive are private, No One Except You Can See Them
                     </div>
 
-                    <div class="col">
+                    <div class="col text-white" style="background-color: #323232;">
                         <h4 class="mt-3 mb-3">3- You Can Read What Others Wrote About You!</h4> <br>
                         You Can Share Your Messages Easily
                     </div>

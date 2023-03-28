@@ -17,7 +17,7 @@ class MessageFactory extends Factory
     public function definition()
     {
         return [
-            'message_body' => $this->faker->sentence($nbWords = 7, $variableNbWords = true),
+            'body' => $this->faker->sentence($nbWords = 7, $variableNbWords = true),
             'user_id'      => $this->faker->numberBetween($min = 1, $max = 100)
         ];
     }

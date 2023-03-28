@@ -14,7 +14,7 @@ class Message extends Model
 
     use softDeletes;
 
-    protected $fillable = ['message_body', 'user_id'];
+    protected $fillable = ['body', 'user_id'];
 
     public function user()
     {

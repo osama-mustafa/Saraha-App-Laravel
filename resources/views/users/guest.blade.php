@@ -35,8 +35,16 @@
                     <form action="{{ route('user.profile.message', ['name' => request()->route('name')]) }}" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label for="message_body">Message</label>
-                            <textarea name="message_body" id="message_body" cols="20" rows="10" class="form-control" placeholder="Leave a constructive message :)"></textarea>
+                            <label for="body">Message</label>
+                            <textarea 
+                                name="body" 
+                                id="message_body" 
+                                cols="20" 
+                                rows="10" 
+                                class="form-control"
+                                placeholder="Leave a constructive message :)"
+                            >
+                            </textarea>
                         </div>
                         <button type="submit" class="btn btn-dark"><i class="fas fa-envelope"></i> Send Message</button>
                     </form>

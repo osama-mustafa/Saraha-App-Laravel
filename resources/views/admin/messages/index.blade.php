@@ -15,6 +15,7 @@
             <table class="table table-responsive-sm table-hover">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Message</th>
                         <th>Sent To</th>
                         <th>Sent At</th>
@@ -23,14 +24,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($messages as $message)
+                    @foreach ($messages as $index => $message)
                         <tr>
-                            <td style="width: 25%">{{ $message->message_body }}</td>
-
-                                <td>
-                                    {{ $message->user->name }}
-                                </td>
-
+                            <td>{{ $index + 1 }}</td>
+                            <td style="width: 25%">{{ $message->body }}</td>
+                            <td>{{ $message->user->name }}</td>
                             <td>{{ $message->created_at->toDateTimeString() }}</td>
                             @if ($message->deleted_at == null)
                             <td>
