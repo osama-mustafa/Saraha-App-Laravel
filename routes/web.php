@@ -1,10 +1,11 @@
 <?php
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MessageController;
-use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/messages', [UserController::class, 'show'])->name('user.profile');
 
     // Delete Message (For Users & Admins)
-    Route::delete('/user/{message_id}/message/delete', [MessageController::class, 'destroy'])->name('user.delete.message');
+    Route::delete('/user/{message}/message/delete', [MessageController::class, 'destroy'])->name('user.delete.message');
 
     // Show All Trashed (Deleted) Messages Of Each User
     // Route::get('/user/{id}/deleted-messages', [MessageController::class, 'trashedMessages'])->name('trashed.messages');
@@ -49,7 +50,6 @@ Route::middleware('auth')->group(function () {
 
 
 // Profile of Users for Guests
-// Route::get('/profile/{id}', [UserController::class, 'guest'])->name('guest.profile');
 
 Route::get('/profile/{name}', [UserController::class, 'guest'])->name('guest.profile');
 
@@ -74,8 +74,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     // Show All Trashed (Deleted) Messages
     Route::get('/deleted-messages', [MessageController::class, 'trashedMessages'])->name('trashed.messages');
 
-    // Soft Deletes For Messages
-    Route::post('/user/{message_id}/restore', [MessageController::class, 'restoreDeletedMessages'])->name('restore.messages');
+    // Restore Deleted Message & Force Delete Message
+    Route::post('/user/{message}/restore', [MessageController::class, 'restoreDeletedMessages'])->name('restore.messages');
     Route::delete('/user/{message_id}/forceDelete', [MessageController::class, 'deleteMessagesForever'])->name('force.delete.messages');        
 
     // Delete User

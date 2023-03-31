@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreMessageRequest;
 use App\Models\Message;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
@@ -23,7 +22,7 @@ class MessageController extends Controller
         ]);
     }
 
-    // Store Messages That Have Been Sent From Guests Or Profile Visitors to Registered USer
+    // Store Message
 
     public function store(StoreMessageRequest $request)
     {
@@ -40,11 +39,10 @@ class MessageController extends Controller
     }
 
 
-    // Delete Messages of User
+    // Delete Message
 
-    public function destroy($id)
+    public function destroy(Message $message)
     {
-        $message = Message::find($id);
         $message->delete();
         return redirect()->back()->with([
            'message_deleted' => '<b>Message</b> has been deleted',
@@ -56,35 +54,30 @@ class MessageController extends Controller
 
     public function trashedMessages()
     {
-        $auth_user = Auth::user();
         $messages  = Message::onlyTrashed()->paginate(4);
-        return view('admin.messages.deletedMessages')->with([
-
+        return view('admin.messages.deleted-messages')->with([
             'messages' => $messages,
-            'auth_user' => $auth_user,
         ]);
     }
 
-    // Restore Trashed Messages of User
+    // Restore Trashed Message
 
     public function restoreDeletedMessages($id)
     {
         $message = Message::withTrashed()->where('id', $id);
         $message->restore();
         return redirect()->route('trashed.messages')->with([
-
             'message_restored' => '<b>Message</b> has been restored successfully!'
         ]);
     }
 
-    // Delete Messages Forever For User
+    // Delete Messages Forever
 
     public function deleteMessagesForever($id)
     {
         $message = Message::withTrashed()->where('id', $id);
         $message->forceDelete();
         return redirect()->route('trashed.messages')->with([
-
             'message_deleted' => '<b>Message</b> has been deleted Forever!!'
         ]);
 
