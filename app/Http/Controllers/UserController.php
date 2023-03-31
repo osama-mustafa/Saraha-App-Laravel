@@ -2,31 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdatePasswordRequest;
+use App\Http\Requests\UpdateProfileRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 
 class UserController extends Controller
 {
 
-    // Create Public Profile & Form For Each User, To Send Private Messages To Him 
+    // Public profile for each user to receive private messages 
 
     public function guest($name)
     {
-        $auth_user    = Auth::user();
         $user         = User::where('name', $name)->firstOrFail();
         $name         = request()->route('name');
-        // $username     = $user->name;
 
-        return view ('users.guest')->with([
-
-            // 'username'  => $username,
+        return view ('profile.guest')->with([
             'user'      => $user,
-            'auth_user' => $auth_user
         ]);
 
     }
@@ -35,99 +31,56 @@ class UserController extends Controller
 
     public function index()
     {
-        $auth_user  = Auth::user();
         $users      = User::paginate(10);
         return view ('admin.users.index')->with([
-
             'users'     => $users,
-            'auth_user' => $auth_user
         ]);
     }
 
     // Edit profile of User
 
-    public function editYourProfile($id)
+    public function editProfile()
     {
-        $id         = Auth::id();
-        $auth_user  = User::where('id', $id)->first();
-        return view('users.edit')->With([
-
-            'auth_user' => $auth_user,
-         ]); 
-
+        return view('profile.edit');
     }
 
-    // Update profile of User
+    // Update profile
 
-    public function updateYourProfile(Request $request, $id)
+
+    public function updateProfile(UpdateProfileRequest $request, User $user)
     {
-
-        $id        = Auth::id();
-        $auth_user = User::where('id', $id)->first();
-        $validatedData =  $request->validate([
-
-            // 'name'  => 'required|min:5|max:255|string',
-            // 'name'  => 'required|unique:users|min:5|max:255',
-            'name'  => [
-                'required', 'min:5', 'max:255',
-                Rule::unique('users', 'name')->ignore($auth_user->id)
-            ],
-            'email' => [
-                'required', 
-                Rule::unique('users', 'email')->ignore($auth_user->id)
-            ]
-        ]);
-
-        $auth_user->name  = $validatedData['name'];
-        $auth_user->email = $validatedData['email'];
-        $auth_user->save();
+        $validatedData  =  $request->validated();
+        $user->name     = $validatedData['name'];
+        $user->email    = $validatedData['email'];
+        $user->save();
 
         return redirect()->back()->with([
-
             'profile_updated' => '<b>Your profile</b> has been updated successfully!'
-
         ]);
     }
 
     // Change Password of User
 
-    public function changePassword($id)
+    public function changePassword()
     {
-        $id = Auth::id();
-        $auth_user = User::where('id', $id)->first();
-        return view('users.changePassword')->with([
-
-            'auth_user' => $auth_user
-
-        ]);
+        return view('profile.change-password');
     }
 
     // Update Password of User
 
-    public function updatePassword(Request $request, $id)
+    public function updatePassword(UpdatePasswordRequest $request)
     {
-        $id         = Auth::id();
-        $auth_user  = User::where('id', $id)->first();
-        $request->validate([
-
-            'password'    => 'required',
-            'newpassword' => 'required|confirmed|min:8',
-        ]);
-
-        if (!Hash::check($request->password, $auth_user->password))
-        {
-            return redirect()->route('change.password', $id)->with([
-
-                'incorrect_password' => 'Current Password Is Incorrect'
-            ]);
-        }
-        else 
-        {
-            $auth_user->password = Hash::make($request->newpassword);
-            $auth_user->save();
+        $user = Auth::user();
+        if (confirmOldPasswordBeforeUpdateIt($request->password, $user->password)) {
+            $validatedData = $request->validated();
+            $user->password = Hash::make($validatedData['newpassword']);
+            $user->save();
             return redirect()->back()->with([
-
                 'password_updated' => 'Your Password has been updated successfully!'
+            ]);
+        } else {
+            return redirect()->route('change.password')->with([
+                'incorrect_password' => 'Current Password Is Incorrect'
             ]);
         }
     }
@@ -137,7 +90,7 @@ class UserController extends Controller
     public function show()
     {
         $auth_user = Auth::user(); 
-        return view('users.user')->with([
+        return view('profile.user')->with([
 
             'auth_user' => $auth_user
         ]);

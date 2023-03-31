@@ -26,8 +26,8 @@
                                     <i class="fas fa-cog"></i> Setting
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('edit.profile', Auth::id()) }}">Edit Profile</a>
-                                    <a class="dropdown-item" href="{{ route('change.password', Auth::id()) }}">Change Password</a>
+                                    <a class="dropdown-item" href="{{ route('edit.profile') }}">Edit Profile</a>
+                                    <a class="dropdown-item" href="{{ route('change.password') }}">Change Password</a>
                                 </div>
                             </li>
 

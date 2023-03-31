@@ -43,8 +43,7 @@
                                 rows="10" 
                                 class="form-control"
                                 placeholder="Leave a constructive message :)"
-                            >
-                            </textarea>
+                            ></textarea>
                         </div>
                         <button type="submit" class="btn btn-dark"><i class="fas fa-envelope"></i> Send Message</button>
                     </form>
@@ -73,7 +72,7 @@
             <hr>
             <h3 class="mb-0">You Can Share This Link with Others to Know What They Say about You!</h3>
             <hr>
-            <h3 id="public_profile">{{ route('guest.profile', ['name' => $auth_user->name]) }}</h3>
+            <h3 id="public_profile">{{ route('guest.profile', ['name' => auth()->user()->name]) }}</h3>
           </div>          
 
     </div>

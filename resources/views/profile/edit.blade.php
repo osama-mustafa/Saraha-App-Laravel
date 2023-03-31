@@ -33,15 +33,15 @@
             @endif --}}
 
             <div class="card-body">
-                <form action="{{ route('update.profile', $auth_user->id) }}" method="POST">
+                <form action="{{ route('update.profile', auth()->user()->id) }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" name="name" class="form-control" value="{{ $auth_user->name }}">
+                        <input type="text" name="name" class="form-control" value="{{ auth()->user()->name }}">
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" name="email" class="form-control" value="{{ $auth_user->email }}">
+                        <input type="email" name="email" class="form-control" value="{{ auth()->user()->email }}">
                     </div>
                     <button type="submit" class="btn btn-dark">Update</button>
                 </form>        

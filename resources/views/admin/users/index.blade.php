@@ -9,7 +9,7 @@
 
     @if (session('admin_message'))
         <div class="alert alert-success">
-            {!! session('admin_message') !!}
+            {{ session('admin_message') }}
         </div>
     @endif
 

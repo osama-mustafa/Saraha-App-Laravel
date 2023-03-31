@@ -39,12 +39,12 @@ Route::middleware('auth')->group(function () {
     // Route::get('/user/{id}/deleted-messages', [MessageController::class, 'trashedMessages'])->name('trashed.messages');
 
     // Edit & Update User
-    Route::get('/profile/{id}/edit', [UserController::class, 'editYourProfile'])->name('edit.profile');
-    Route::post('/profile/{id}/update', [UserController::class, 'updateYourProfile'])->name('update.profile');
+    Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('edit.profile');
+    Route::post('/profile/{user}/update', [UserController::class, 'updateProfile'])->name('update.profile');
 
     // Change Password of User
-    Route::get('/profile/{id}/changepassword', [UserController::class, 'changePassword'])->name('change.password');
-    Route::post('profile/{id}/updatepassword', [UserController::class, 'updatePassword'])->name('update.password');
+    Route::get('/profile/change-password', [UserController::class, 'changePassword'])->name('change.password');
+    Route::post('profile/{id}/update-password', [UserController::class, 'updatePassword'])->name('update.password');
 
 });
 
