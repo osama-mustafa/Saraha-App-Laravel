@@ -76,13 +76,13 @@
                             <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
                                 {{-- <div class="card-header">Message</div> --}}
                                 <div class="card-body">
-                                <h5 class="card-text">{{ $message->body }}</h5>
+                                    <h5 class="card-text">{{ $message->body }}</h5>
                                 </div>
                             </div>
                             <form action="{{ route('user.delete.message', $message->id) }}" class="mb-3" method="POST">
                                 @csrf 
                                 @method('DELETE')
-                                <button class="btn btn-danger ml-3"><i class="fas fa-trash"></i> Delete</button>
+                                <button class="btn btn-dark ml-3 btn-sm"><i class="fas fa-trash"></i> Delete</button>
                             </form>    
                         </div>
                         @endforeach

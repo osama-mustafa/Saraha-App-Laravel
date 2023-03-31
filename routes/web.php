@@ -75,19 +75,19 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/deleted-messages', [MessageController::class, 'trashedMessages'])->name('trashed.messages');
 
     // Restore Deleted Message & Force Delete Message
-    Route::post('/user/{message}/restore', [MessageController::class, 'restoreDeletedMessages'])->name('restore.messages');
+    Route::post('/user/{message_id}/restore', [MessageController::class, 'restoreDeletedMessages'])->name('restore.messages');
     Route::delete('/user/{message_id}/forceDelete', [MessageController::class, 'deleteMessagesForever'])->name('force.delete.messages');        
 
     // Delete User
-    Route::delete('/user/{id}/delete', [UserController::class, 'destroy'])->name('delete.user');
+    Route::delete('/user/{user}/delete', [UserController::class, 'destroy'])->name('delete.user');
 
     // Make User As Admin & Remove User From Admin
     Route::post('/user/{id}/admin', [UserController::class, 'makeAdmin'])->name('make.admin');
     Route::post('/user/{id}/notadmin', [UserController::class, 'removeAdmin'])->name('remove.admin');
 
     // Edit User
-    Route::get('/user/{id}/edit', [UserController::class, 'editUserByAdmin'])->name('edit.user');
-    Route::post('/user/{id}/update', [UserController::class, 'updateUserByAdmin'])->name('update.user');
+    Route::get('/user/{user}/edit', [UserController::class, 'editUser'])->name('edit.user');
+    Route::post('/user/{user}/update', [UserController::class, 'updateUser'])->name('update.user');
 
 });
     

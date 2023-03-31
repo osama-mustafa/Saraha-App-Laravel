@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\UpdateProfileRequest;
-use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
 
 
 class UserController extends Controller
@@ -89,48 +87,26 @@ class UserController extends Controller
 
     public function show()
     {
-        $auth_user = Auth::user(); 
-        return view('profile.user')->with([
-
-            'auth_user' => $auth_user
-        ]);
-
+        return view('profile.user');
     }
  
-    // Edit User Profile By Admin
+    // Edit User By Admin
 
-    public function editUserByAdmin($id)
+    public function editUser(User $user)
     {
-        $auth_user  = Auth::user();
-        $user       = User::find($id);
         return view ('admin.users.edit')->with([
-
             'user'      => $user,
-            'auth_user' => $auth_user
-
         ]);
     }
 
 
     // Update User Profile By Admin
 
-    public function updateUserByAdmin(Request $request, $id)
+    public function updateUser(UpdateProfileRequest $request, User $user)
     {
-        $user = User::find($id);
-        $request->validate([
-
-            'name'  => [
-                'required', 'min:5',
-                Rule::unique('users', 'name')->ignore($user->id)
-            ],
-            'email' => [
-                'required', 
-                Rule::unique('users', 'email')->ignore($user->id)
-            ]
-        ]);
-
-        $user->name     = $request->name;
-        $user->email    = $request->email;
+        $validatedData  = $request->validated();
+        $user->name     = $validatedData['name'];
+        $user->email    = $validatedData['email'];
         $user->save();
 
         if (!empty($request->input('password')))
@@ -140,17 +116,14 @@ class UserController extends Controller
         }
 
         return redirect()->back()->with([
-            'profile_updated' => 'Profile of <b>' . $user->name . '</b> has been updated successfully!'
+            'profile_updated' => "Profile of <b>{$user->name}</b> has been updated successfully!"
         ]);
-
-
     }
 
     // Delete User
 
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user = User::find($id);
         $user->delete();
         return redirect()->back()->with([
             'user_deleted' => 'User has been deleted'
@@ -162,10 +135,10 @@ class UserController extends Controller
     public function makeAdmin($id)
     {
         $user = User::find($id);
-        $user->admin = true;
+        $user->is_admin = true;
         $user->update();
         return redirect()->back()->with([
-            'admin_message' => '<strong>' . $user->name . ' </strong> is added to Admins'
+            'admin_message' => "<b>{$user->name}</b> is added to Admins"
         ]);
     }
 
@@ -174,10 +147,10 @@ class UserController extends Controller
     public function removeAdmin($id)
     {
         $user = User::find($id);
-        $user->admin = false;
+        $user->is_admin = false;
         $user->update();
         return redirect()->back()->with([
-            'admin_message' => '<strong>' . $user->name . ' </strong> has been removed from admins'
+            'admin_message' => "<b>{$user->name}</b> has been removed from admins"
         ]);
     }
 }

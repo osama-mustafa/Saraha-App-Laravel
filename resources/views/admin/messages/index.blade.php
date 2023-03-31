@@ -28,7 +28,7 @@
                             <td>{{ $index + 1 }}</td>
                             <td style="width: 25%">{{ $message->body }}</td>
                             <td>
-                                <a href="{{ route('edit.user', ['id' => $message->user_id]) }}">
+                                <a href="{{ route('edit.user', $message->user_id) }}">
                                     {{ $message->user->name }}
                                 </a>
                             </td>
