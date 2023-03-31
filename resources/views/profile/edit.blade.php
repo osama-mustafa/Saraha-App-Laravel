@@ -6,7 +6,7 @@
 
         <div class="card">
             <div class="card-header">
-                <h3>Edit Your Profile</h3>
+                <h3>Edit Profile</h3>
             </div>
             @if ($errors->any())
                 <div class="alert alert-danger">
