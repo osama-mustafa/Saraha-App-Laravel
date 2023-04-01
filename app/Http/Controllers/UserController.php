@@ -44,7 +44,6 @@ class UserController extends Controller
 
     // Update profile
 
-
     public function updateProfile(UpdateProfileRequest $request, User $user)
     {
         $validatedData  =  $request->validated();
@@ -57,19 +56,19 @@ class UserController extends Controller
         ]);
     }
 
-    // Change Password of User
+    // Change Password 
 
     public function changePassword()
     {
         return view('profile.change-password');
     }
 
-    // Update Password of User
+    // Update Password 
 
     public function updatePassword(UpdatePasswordRequest $request)
     {
         $user = Auth::user();
-        if (confirmOldPasswordBeforeUpdateIt($request->password, $user->password)) {
+        if (isUserEnterOldPasswordCorrectly($request->password, $user->password)) {
             $validatedData = $request->validated();
             $user->password = Hash::make($validatedData['newpassword']);
             $user->save();
@@ -100,7 +99,7 @@ class UserController extends Controller
     }
 
 
-    // Update User Profile By Admin
+    // Update User By Admin
 
     public function updateUser(UpdateProfileRequest $request, User $user)
     {
