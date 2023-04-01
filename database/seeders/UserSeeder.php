@@ -16,12 +16,13 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        // Create the first user of the system
+        
         DB::table('users')->insert([
             'name' => 'admin',
             'email' => 'admin@saraha.com',
             'password' => bcrypt('12345678'),
             'is_admin' => true
-
         ]);
         User::factory()->count(100)->create();
     }

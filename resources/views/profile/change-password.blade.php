@@ -2,7 +2,6 @@
 
 <div class="container">
     <div class="col-md-8">
-
         <div class="card">
             <div class="card-header">
                 <h3>Change Password</h3>
@@ -51,7 +50,5 @@
                 </form>        
             </div>
         </div>    
-
-
     </div>
 </div>
