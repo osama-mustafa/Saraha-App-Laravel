@@ -26,4 +26,11 @@ class AuthenticationTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee("Register");
     }
+
+    public function test_authenticated_user_cannot_access_register_page()
+    {
+        $response = $this->actingAs($this->user)->get(route("register"));
+        $response->assertStatus(302);
+        $response->assertRedirect(route("home"));
+    }
 }
