@@ -19,8 +19,8 @@ class MessageTest extends TestCase
         $this->user = User::factory()->create();
     }
 
-    public function test_user_cannot_send_private_message_to_himself() {
-
+    public function test_user_cannot_send_private_message_to_himself() 
+    {
         $this->actingAs($this->user)->get("/profile/{$this->user->name}");
         $view = $this->view("profile.guest");
         $view->assertSee("You Cannot Send Private Saraha Messages to Yourself!");
@@ -42,7 +42,7 @@ class MessageTest extends TestCase
         $this->assertDatabaseCount('messages', 1);
     }
 
-    public function test_visitor_cannot_send_empty_message_to_specific_user() {
+    public function test_visitor_cannot_send_empty_message_to_any_user() {
         $response = $this->post(route("user.profile.message", $this->user->name), [
             'body' => "",
             'user_id' => $this->user->id
