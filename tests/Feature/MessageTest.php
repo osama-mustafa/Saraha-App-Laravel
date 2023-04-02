@@ -26,5 +26,11 @@ class MessageTest extends TestCase
         $view->assertSee("You Cannot Send Private Saraha Messages to Yourself!");
     }
 
+    public function test_visitor_can_access_public_profile_of_specific_user() 
+    {
+        $response = $this->get(route('guest.profile', $this->user->name));
+        $response->assertViewHas('user', $this->user);
+    }
+
 
 }
