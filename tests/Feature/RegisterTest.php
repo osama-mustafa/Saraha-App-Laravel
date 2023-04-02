@@ -21,7 +21,9 @@ class RegisterTest extends TestCase
         ]);
         $response->assertStatus(302);
         $response->assertRedirect(route("home"));
-        $this->assertDatabaseCount("users", 1);
+        $this->assertDatabaseHas("users", [
+            "email" => "test_user@gmail.com"
+        ]);
     }
 
 }
