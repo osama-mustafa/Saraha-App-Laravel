@@ -32,5 +32,15 @@ class MessageTest extends TestCase
         $response->assertViewHas('user', $this->user);
     }
 
+    public function test_visitor_can_send_private_message_to_specific_user()
+    {
+        $response = $this->post(route("user.profile.message", $this->user->name), [
+            'body'      => "test message",
+            'user_id'   => $this->user->id
+        ]);
+        $response->assertStatus(302);
+        $this->assertDatabaseCount('messages', 1);
+    }
+
 
 }
