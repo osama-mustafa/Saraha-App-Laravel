@@ -24,4 +24,11 @@ class ProfileTest extends TestCase
         $response->assertSee("Edit Profile");
         $response->assertStatus(200);
     }
+
+    public function test_authenticated_user_can_access_change_password_page()
+    {
+        $response = $this->actingAs($this->user)->get(route('change.password'));
+        $response->assertSee("Change Password");
+        $response->assertStatus(200);
+    }
 }
