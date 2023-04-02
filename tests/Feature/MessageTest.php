@@ -42,5 +42,14 @@ class MessageTest extends TestCase
         $this->assertDatabaseCount('messages', 1);
     }
 
-
+    public function test_visitor_cannot_send_empty_message_to_specific_user() {
+        $response = $this->post(route("user.profile.message", $this->user->name), [
+            'body' => "",
+            'user_id' => $this->user->id
+        ]);
+        $response->assertSessionHasErrors('body');        
+    }
 }
+
+
+
