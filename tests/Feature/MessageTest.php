@@ -19,7 +19,7 @@ class MessageTest extends TestCase
         $this->user = User::factory()->create();
     }
 
-    public function test_user_cannot_send_private_message_to_himself() 
+    public function test_authenticated_user_cannot_send_private_message_to_himself() 
     {
         $this->actingAs($this->user)->get("/profile/{$this->user->name}");
         $view = $this->view("profile.guest");
