@@ -59,4 +59,22 @@ class AuthenticationTest extends TestCase
         ]);
     }
 
+    public function test_user_can_login_successfully()
+    {
+        $this->user = User::factory()->create([
+           "name" => "test_user",
+           "email" => "test_user@gmail.com",
+           "password" => bcrypt("12345678")
+        ]);
+
+        $response = $this->post(route("login"), [
+            "email" => "test_user@gmail.com",
+            "password" => "12345678"
+        ]);
+
+        $this->assertAuthenticated();
+        $response->assertStatus(302);
+        $response->assertRedirect(route("home"));
+    }
+
 }
