@@ -51,5 +51,13 @@ class AuthorizationTest extends TestCase
         $response->assertStatus(200);
         $response->assertSeeText("Messages");
     }
+
+    public function test_admin_can_access_deleted_messages_page_in_admin_dashboard()
+    {
+        $response = $this->actingAs($this->admin)->get(route("trashed.messages"));
+        $response->assertViewIs("admin.messages.deleted-messages");
+        $response->assertStatus(200);
+        $response->assertSeeText("Deleted Messages");
+    }
 }
 
