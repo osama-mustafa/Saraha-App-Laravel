@@ -35,5 +35,13 @@ class AuthorizationTest extends TestCase
         $response = $this->actingAs($this->user)->get(route("users"));
         $response->assertStatus(302);
     }
+
+    public function test_admin_can_access_users_page_in_admin_dashboard()
+    {
+        $response = $this->actingAs($this->admin)->get(route("users"));
+        $response->assertViewIs("admin.users.index");
+        $response->assertStatus(200);
+        $response->assertSeeText("Users");
+    }
 }
 
