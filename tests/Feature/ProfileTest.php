@@ -17,7 +17,7 @@ class ProfileTest extends TestCase
     public function setUp() : void
     {
         parent::setUp();
-        $this->user = User::factory()->create();
+        $this->user = createUserForTesting("test_user", "test_user@gmail.com");
         $this->message = Message::factory()->create([
             "body"    => "test private message sent to this user",
             "user_id" => $this->user->id

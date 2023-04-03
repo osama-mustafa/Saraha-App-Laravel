@@ -16,7 +16,7 @@ class MessageTest extends TestCase
 
     public function setUp() : void {
         parent::setUp();
-        $this->user = User::factory()->create();
+        $this->user = createUserForTesting("test_user", "test_user@gmail.com");
     }
 
     public function test_authenticated_user_cannot_send_private_message_to_himself() 
@@ -47,7 +47,8 @@ class MessageTest extends TestCase
             'body' => "",
             'user_id' => $this->user->id
         ]);
-        $response->assertSessionHasErrors('body');        
+
+        $response->assertSessionHasErrors('body');  
     }
 }
 

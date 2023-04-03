@@ -13,25 +13,15 @@ use Tests\TestCase;
 class AuthorizationTest extends TestCase
 {
 
-    use RefreshDatabase, InteractsWithSession;
+    use RefreshDatabase;
     public $user;
     public $admin;
 
     public function setUp() : void
     {
         parent::setUp();
-        $this->user = User::factory()->create([
-            "name" => "test_user",
-            "email" => "test_user@gmail.com",
-            "password" => bcrypt("12345678")
-        ]);
-
-        $this->admin = User::factory()->create([
-            "name" => "test_admin",
-            "email" => "test_admin@gmail.com",
-            "password" => bcrypt("12345678"),
-            "is_admin" => true
-        ]);
+        $this->user = createUserForTesting("test_user", "test_user@gmail.com");
+        $this->admin = createUserForTesting("test_admin", "test_admin@gmail.com", $is_admin = true);
     }
 
     public function test_non_admin_user_cannot_access_messages_page_in_admin_dashboard()
