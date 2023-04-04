@@ -40,10 +40,6 @@
                         <label for="password">New Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Enter new password">
                     </div>
-                    {{-- <div class="form-group">
-                        <label for="newpassword_confirmation">Confirm New Password</label>
-                        <input type="password" name="newpassword_confirmation" class="form-control" placeholder="Enter new password">
-                    </div> --}}
                     <button type="submit" class="btn btn-dark">Update</button>
                 </form>        
             </div>

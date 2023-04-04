@@ -32,7 +32,7 @@
 
 
             <div class="card-body">
-                <form action="{{ route('update.password', Auth::id()) }}" method="POST">
+                <form action="{{ route('update.password', auth()->id()) }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="name">Current Password (First)</label>
