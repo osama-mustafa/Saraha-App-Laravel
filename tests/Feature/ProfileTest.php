@@ -46,8 +46,6 @@ class ProfileTest extends TestCase
         ]);
     }
 
-
-
     public function test_authenticated_user_can_delete_his_own_received_message()
     {
         $response = $this->actingAs($this->user)

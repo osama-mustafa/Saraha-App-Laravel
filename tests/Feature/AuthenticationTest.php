@@ -67,6 +67,14 @@ class AuthenticationTest extends TestCase
         $response->assertRedirect(route("home"));
     }
 
+    public function test_authenticated_user_can_logout_successfully()
+    {
+        $response = $this->actingAs($this->user)->post(route("logout"));
+        $response->assertStatus(302);
+        $response->assertRedirect("/");
+        $this->assertGuest();
+    }
+
     public function test_authenticated_user_cannot_access_register_page()
     {
         $response = $this->actingAs($this->user)->get(route("register"));
