@@ -16,14 +16,26 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        // Create the first user of the system
-        
+        // Create admin user for the system
+
         DB::table('users')->insert([
             'name' => 'admin',
             'email' => 'admin@saraha.com',
             'password' => bcrypt('12345678'),
             'is_admin' => true
         ]);
+
+        // Create regular user (non-admin) for the system 
+
+        DB::table('users')->insert([
+            'name' => 'test',
+            'email' => 'test@saraha.com',
+            'password' => bcrypt('12345678'),
+            'is_admin' => false
+        ]);
+
+        // Seed additional users for the system
+
         User::factory()->count(100)->create();
     }
 }

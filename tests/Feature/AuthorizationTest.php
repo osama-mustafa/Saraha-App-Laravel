@@ -3,11 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\Concerns\InteractsWithSession;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Routing\Router;
 use Tests\TestCase;
 
 class AuthorizationTest extends TestCase
