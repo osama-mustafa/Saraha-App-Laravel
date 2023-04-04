@@ -27,13 +27,22 @@ class AuthorizationTest extends TestCase
     public function test_non_admin_user_cannot_access_messages_page_in_admin_dashboard()
     {
         $response = $this->actingAs($this->user)->get(route("messages"));
-        $response->assertStatus(302);
+        $response->assertStatus(403);
+        $response->assertSeeText("You Are Not Authorized To Access This Page");
+    }
+
+    public function test_non_admin_user_cannot_access_trashed_messages_page_in_admin_dashboard()
+    {
+       $response = $this->actingAs($this->user)->get(route("trashed.messages"));
+       $response->assertStatus(403);
+       $response->assertSeeText("You Are Not Authorized To Access This Page");
     }
 
     public function test_non_admin_user_cannot_access_users_page_in_admin_dashboard()
     {
         $response = $this->actingAs($this->user)->get(route("users"));
-        $response->assertStatus(302);
+        $response->assertStatus(403);
+        $response->assertSeeText("You Are Not Authorized To Access This Page");
     }
 
     public function test_admin_can_access_users_page_in_admin_dashboard()

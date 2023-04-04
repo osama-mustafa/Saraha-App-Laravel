@@ -19,7 +19,7 @@ class Admin
     {
         if (!Auth::user()->is_admin)
         {
-            return redirect()->back();
+            abort(403, "You Are Not Authorized To Access This Page!");
         }
 
         return $next($request);
