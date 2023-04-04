@@ -33,6 +33,21 @@ class ProfileTest extends TestCase
         $response->assertSeeText("Change Password");
     }
 
+    public function test_authenticated_user_can_change_his_name_and_his_email()
+    {
+        $response = $this->actingAs($this->user)->post(route("update.profile", $this->user->id), [
+            "name" => "new_user_name",
+            "email" => "new_user_email@gmail.com"
+        ]);
+        $response->assertStatus(302);
+        $this->assertDatabaseHas("users", [
+            "name" => "new_user_name",
+            "email" => "new_user_email@gmail.com"
+        ]);
+    }
+
+
+
     public function test_authenticated_user_can_delete_his_own_received_message()
     {
         $response = $this->actingAs($this->user)
