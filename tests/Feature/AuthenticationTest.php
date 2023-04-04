@@ -22,9 +22,17 @@ class AuthenticationTest extends TestCase
     public function test_guest_user_can_access_register_page()
     {
         $response = $this->get(route('register'));
-        $response->assertViewIs("auth.register");
         $response->assertStatus(200);
-        $response->assertSee("Register");
+        $response->assertViewIs("auth.register");
+        $response->assertSeeText("Register");
+    }
+
+    public function test_guest_user_can_access_login_page()
+    {
+        $response = $this->get(route("login"));
+        $response->assertStatus(200);
+        $response->assertViewIs("auth.login");
+        $response->assertSeeText("Login");
     }
 
     public function test_authenticated_user_cannot_access_register_page()
@@ -51,8 +59,8 @@ class AuthenticationTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(route("home"));
         $response->assertStatus(302);
+        $response->assertRedirect(route("home"));
         $this->assertDatabaseHas("users", [
             "name" => "test_user_two",
             "email" => "test_user_two@gmail.com",

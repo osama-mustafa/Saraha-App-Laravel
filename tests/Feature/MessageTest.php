@@ -29,6 +29,7 @@ class MessageTest extends TestCase
     public function test_visitor_can_access_public_profile_of_any_user() 
     {
         $response = $this->get(route('guest.profile', $this->user->name));
+        $response->assertStatus(200);
         $response->assertViewHas('user', $this->user);
     }
 
@@ -48,7 +49,7 @@ class MessageTest extends TestCase
             'body' => "",
             'user_id' => $this->user->id
         ]);
-
+        
         $response->assertSessionHasErrors('body');  
     }
 }

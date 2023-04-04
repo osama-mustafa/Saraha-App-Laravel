@@ -22,15 +22,15 @@ class ProfileTest extends TestCase
     public function test_authenticated_user_can_access_edit_profile_page()
     {
         $response = $this->actingAs($this->user)->get(route('edit.profile'));
-        $response->assertSee("Edit Profile");
         $response->assertStatus(200);
+        $response->assertSeeText("Edit Profile");
     }
 
     public function test_authenticated_user_can_access_change_password_page()
     {
         $response = $this->actingAs($this->user)->get(route('change.password'));
-        $response->assertSee("Change Password");
         $response->assertStatus(200);
+        $response->assertSeeText("Change Password");
     }
 
     public function test_authenticated_user_can_delete_his_own_received_message()
@@ -41,11 +41,11 @@ class ProfileTest extends TestCase
         $this->assertSoftDeleted($this->message);
     }
 
-    public function test_authenticated_user_can_see_his_own_mesages()
+    public function test_authenticated_user_can_see_his_own_messages()
     {
         $response = $this->actingAs($this->user)->get(route("user.profile"));
-        $response->assertViewIs("profile.user");
         $response->assertStatus(200);
+        $response->assertViewIs("profile.user");
         $response->assertSeeText($this->message->body);
     }
 }

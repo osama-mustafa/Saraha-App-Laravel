@@ -39,24 +39,24 @@ class AuthorizationTest extends TestCase
     public function test_admin_can_access_users_page_in_admin_dashboard()
     {
         $response = $this->actingAs($this->admin)->get(route("users"));
-        $response->assertViewIs("admin.users.index");
         $response->assertStatus(200);
+        $response->assertViewIs("admin.users.index");
         $response->assertSeeText("Users");
     }
 
     public function test_admin_can_access_messages_page_in_admin_dashboard()
     {
         $response = $this->actingAs($this->admin)->get(route("messages"));
-        $response->assertViewIs("admin.messages.index");
         $response->assertStatus(200);
+        $response->assertViewIs("admin.messages.index");
         $response->assertSeeText("Messages");
     }
 
     public function test_admin_can_access_deleted_messages_page_in_admin_dashboard()
     {
         $response = $this->actingAs($this->admin)->get(route("trashed.messages"));
-        $response->assertViewIs("admin.messages.deleted-messages");
         $response->assertStatus(200);
+        $response->assertViewIs("admin.messages.deleted-messages");
         $response->assertSeeText("Deleted Messages");
     }
 }
