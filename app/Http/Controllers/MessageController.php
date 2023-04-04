@@ -54,7 +54,7 @@ class MessageController extends Controller
 
     public function trashedMessages()
     {
-        $messages  = Message::onlyTrashed()->paginate(4);
+        $messages  = Message::onlyTrashed()->paginate(8);
         return view('admin.messages.deleted-messages')->with([
             'messages' => $messages,
         ]);
