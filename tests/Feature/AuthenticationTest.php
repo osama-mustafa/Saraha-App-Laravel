@@ -35,20 +35,6 @@ class AuthenticationTest extends TestCase
         $response->assertSeeText("Login");
     }
 
-    public function test_authenticated_user_cannot_access_register_page()
-    {
-        $response = $this->actingAs($this->user)->get(route("register"));
-        $response->assertStatus(302);
-        $response->assertRedirect(route("home"));
-    }
-
-    public function test_authenticated_user_cannot_access_login_page()
-    {
-       $response = $this->actingAs($this->user)->get(route("login"));
-       $response->assertStatus(302);
-       $response->assertRedirect(route("home"));
-    }
-
     public function test_guest_user_can_register_account_successfully()
     {
         $response = $this->post(route("register"), [
@@ -79,6 +65,20 @@ class AuthenticationTest extends TestCase
         $this->assertAuthenticated();
         $response->assertStatus(302);
         $response->assertRedirect(route("home"));
+    }
+
+    public function test_authenticated_user_cannot_access_register_page()
+    {
+        $response = $this->actingAs($this->user)->get(route("register"));
+        $response->assertStatus(302);
+        $response->assertRedirect(route("home"));
+    }
+
+    public function test_authenticated_user_cannot_access_login_page()
+    {
+       $response = $this->actingAs($this->user)->get(route("login"));
+       $response->assertStatus(302);
+       $response->assertRedirect(route("home"));
     }
 
 }
