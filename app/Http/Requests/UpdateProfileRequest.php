@@ -32,7 +32,8 @@ class UpdateProfileRequest extends FormRequest
             'email' => [
                 'required', 
                 Rule::unique('users', 'email')->ignore($this->user->id)
-            ]
+            ],
+            'image' => 'sometimes|mimes:jpeg,jpg,png,gif|max:2048'
         ];
     }
 }

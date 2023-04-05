@@ -1,4 +1,3 @@
-
 @include('layouts.app')
 
 <div class="container">
@@ -9,44 +8,59 @@
                 <h3>Edit Profile</h3>
             </div>
             @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>
-                                {{ $error }}
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>
+                        {{ $error }}
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
             @endif
 
             @if (session('profile_updated'))
-                <div class="alert alert-success">
-                    {!! session('profile_updated') !!}
-                </div>
+            <div class="alert alert-success">
+                {!! session('profile_updated') !!}
+            </div>
             @endif
 
             {{-- @if (session('email_exists'))
                 <div class="alert alert-danger">
                     {{ session('email_exists') }}
-                </div>
-            @endif --}}
+        </div>
+        @endif --}}
 
-            <div class="card-body">
-                <form action="{{ route('update.profile', auth()->id()) }}" method="POST">
-                    @csrf
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" class="form-control" value="{{ auth()->user()->name }}">
+        <div class="card-body">
+            <form action="{{ route('update.profile', auth()->id()) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" class="form-control" value="{{ auth()->user()->name }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" class="form-control" value="{{ auth()->user()->email }}">
+                </div>
+
+                @if (auth()->user()->image)
+                    <div>
+                        <img class="avatar" src="{{ asset('images/') }} {{ auth()->user()->image }}" alt="avatar">
                     </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" name="email" class="form-control" value="{{ auth()->user()->email }}">
+                @else
+                    <div>
+                        <img class="avatar" src="{{ asset('images/profile.png') }}" alt="avatar">
                     </div>
-                    <button type="submit" class="btn btn-dark">Update</button>
-                </form>        
-            </div>
-        </div>    
+                @endif
+
+                <div class="form-group">
+                    <label for="image">Upload Profile Image</label>
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image">
+                </div>
+                <button type="submit" class="btn btn-dark">Update</button>
+            </form>
+        </div>
     </div>
 </div>
-
+</div>

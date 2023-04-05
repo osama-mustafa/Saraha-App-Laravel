@@ -49,6 +49,12 @@ class UserController extends Controller
         $validatedData  =  $request->validated();
         $user->name     = $validatedData['name'];
         $user->email    = $validatedData['email'];
+
+        if ($request->has('image')) {
+            $image = handleUploadImage($request, 'images');
+            $user->image = $image;
+        }
+
         $user->save();
 
         return redirect()->back()->with([
