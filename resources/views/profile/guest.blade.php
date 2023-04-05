@@ -1,52 +1,73 @@
 @include('layouts.app')
 @guest
     <div class="container">
-        <div class="card">
+        @if ($user->is_active)
+            <div class="card">
 
-            <div class="card-header">
-                <h3>
-                    <i class="fas fa-envelope"></i> Leave a constructive message to <strong> {!! $user->name !!} </strong>
-                </h3> 
-            </div>
-
-            @if (session('message_sent'))
-                <div class="alert alert-success">
-                    {{ session('message_sent') }}
+                <div class="card-header">
+                    <h3>
+                        <i class="fas fa-envelope"></i> Leave a constructive message to <strong> {!! $user->name !!} </strong>
+                    </h3> 
                 </div>
-            @endif
 
-            @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                    <div class="alert alert-danger">
-                        {{ $error }}
+                @if (session('message_sent'))
+                    <div class="alert alert-success">
+                        {{ session('message_sent') }}
                     </div>
-                @endforeach
-            @endif
-            
-            <div class="card-body">
-                <div class="col-md-6">
-                    <form action="{{ route('user.profile.message', ['name' => request()->route('name')]) }}" method="POST">
-                        @csrf
-                        <div class="form-group">
-                            <label for="body">Message</label>
-                            <textarea 
-                                name="body" 
-                                id="message_body" 
-                                cols="20" 
-                                rows="10" 
-                                class="form-control"
-                                placeholder="Leave a constructive message :)"
-                            ></textarea>
+                @endif
+
+                @if ($errors->any())
+                    @foreach ($errors->all() as $error)
+                        <div class="alert alert-danger">
+                            {{ $error }}
                         </div>
-                        <button type="submit" class="btn btn-dark btn-sm"><i class="fas fa-envelope"></i> Send Message</button>
+                    @endforeach
+                @endif
+                
+                <div class="card-body">
+                    <div class="col-md-6">
+                        <form action="{{ route('user.profile.message', ['name' => request()->route('name')]) }}" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <label for="body">Message</label>
+                                <textarea 
+                                    name="body" 
+                                    id="message_body" 
+                                    cols="20" 
+                                    rows="10" 
+                                    class="form-control"
+                                    placeholder="Leave a constructive message :)"
+                                ></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-dark btn-sm"><i class="fas fa-envelope"></i> Send Message</button>
+                        </form>
+                    </div>
+                </div>
+                @if ($user->is_active)
+                    <form>
+                        <button type="submit" class="btn btn-danger btn-sm report-button"><i class="fas fa-flag"></i> Report User</button>
                     </form>
+                @endif
+
+            </div>
+        @else 
+            <div class="card">
+
+                <div class="card-header text-center">
+                    <h3>
+                        <i class="fas fa-envelope"></i> Leave a constructive message to <strong> {!! $user->name !!} </strong>
+                    </h3> 
+                </div>
+                
+                <div class="card-body text-center">
+                    <div class="col-md-12">
+                        <h3>
+                            <span class="reported-user-name"><strong> {!! $user->name !!} </strong></span> has been blocked due to violating our services, so he cannot receive any private messages
+                        </h3>
+                    </div>
                 </div>
             </div>
-            <form>
-                <button type="submit" class="btn btn-danger btn-sm report-button"><i class="fas fa-flag"></i> Report User</button>
-            </form>
-
-        </div>
+        @endif
     </div>
 @endguest
 
