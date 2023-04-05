@@ -80,5 +80,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/user/{user}/edit', [UserController::class, 'editUser'])->name('edit.user');
     Route::post('/user/{user}/update', [UserController::class, 'updateUser'])->name('update.user');
 
+    // Block & Unblock users
+    Route::post('/user/{user}/block', [UserController::class, 'block'])->name('block.admin');
+    Route::post('/user/{user}/unblock', [UserController::class, 'unblock'])->name('unblock.admin');
+    
+
 });
     

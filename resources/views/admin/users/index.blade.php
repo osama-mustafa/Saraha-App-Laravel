@@ -26,6 +26,7 @@
                 <th>Edit</th>
                 <th>Delete</th>
                 <th>Admin</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
@@ -53,6 +54,7 @@
                         </form>
                     </td>
 
+                    {{-- Admin --}}
                     @if ($user->is_admin == true)
                         <td>
                             <form action="{{ route('remove.admin', $user->id) }}" method="POST">
@@ -76,6 +78,32 @@
                             </form>
                         </td>
                     @endif
+
+                    {{-- Block --}}
+                    @if ($user->is_blocked == true)
+                        <td>
+                            <form action="{{ route('unblock.admin', $user->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-dark btn-sm">
+                                    <i class="fa fa-user"></i>
+                                    Unblock
+                                </button>
+                            </form>
+                        </td>
+                    @endif
+
+                    @if ($user->is_blocked == false)
+                        <td>
+                            <form action="{{ route('block.admin', $user->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-dark btn-sm">
+                                    <i class="fa fa-user-slash"></i>
+                                    Block
+                                </button>
+                            </form>
+                        </td>
+                    @endif
+
                 </tr>
             @endforeach
         </tbody>

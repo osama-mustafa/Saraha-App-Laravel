@@ -1,7 +1,7 @@
 @include('layouts.app')
 @guest
     <div class="container">
-        @if ($user->is_active)
+        @unless ($user->is_blocked)
             <div class="card">
 
                 <div class="card-header">
@@ -43,7 +43,7 @@
                         </form>
                     </div>
                 </div>
-                @if ($user->is_active)
+                @if ($user->is_blocked)
                     <form>
                         <button type="submit" class="btn btn-danger btn-sm report-button"><i class="fas fa-flag"></i> Report User</button>
                     </form>
@@ -67,7 +67,7 @@
                     </div>
                 </div>
             </div>
-        @endif
+        @endunless
     </div>
 @endguest
 

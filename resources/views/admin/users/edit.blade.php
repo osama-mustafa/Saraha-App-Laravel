@@ -1,6 +1,7 @@
 
-@include('layouts.app')
+@extends('layouts.app')
 
+@section("content")
 <div class="container">
     <div class="col-sm-6">
 
@@ -46,4 +47,9 @@
         </div>    
     </div>
 </div>
+@endsection
 
+@section("scripts")
+    <script>
+    </script>
+@endsection

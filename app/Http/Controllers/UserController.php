@@ -152,4 +152,26 @@ class UserController extends Controller
             'admin_message' => "<b>{$user->name}</b> has been removed from admins"
         ]);
     }
+
+    // Block User
+
+    public function block(User $user)
+    {
+        $user->is_blocked = true;
+        $user->save();
+        return redirect()->back()->with([
+            'admin_message' => "<b>{$user->name}</b> has been blocked, and will not receive any private messages"
+        ]);
+    }
+
+    // Unblock User
+
+    public function unblock(User $user)
+    {
+        $user->is_blocked = false;
+        $user->save();
+        return redirect()->back()->with([
+            'admin_message' => "<b>{$user->name}</b> has been unblocked, and can receive private messages"
+        ]);
+    }
 }
