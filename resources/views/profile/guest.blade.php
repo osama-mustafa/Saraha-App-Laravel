@@ -1,36 +1,29 @@
 @include('layouts.app')
-
 @guest
+    <div class="container">
+        <div class="card">
 
-<div class="container">
-
-    <div class="card">
-
-        <div class="card-header">
-            <h3>
-                <i class="fas fa-envelope"></i> Leave a constructive message to <strong> {!! $user->name !!} </strong>
-            </h3> 
-        </div>
-
-        @if (session('message_sent'))
-            <div class="alert alert-success">
-                {{ session('message_sent') }}
+            <div class="card-header">
+                <h3>
+                    <i class="fas fa-envelope"></i> Leave a constructive message to <strong> {!! $user->name !!} </strong>
+                </h3> 
             </div>
-        @endif
 
-        @if ($errors->any())
-            @foreach ($errors->all() as $error)
-                <div class="alert alert-danger">
-                    {{ $error }}
+            @if (session('message_sent'))
+                <div class="alert alert-success">
+                    {{ session('message_sent') }}
                 </div>
-            @endforeach
-        @endif
-        
-        <div class="card-body">
+            @endif
 
-
-            {{-- Show The Message Form Form  For Guests or Not Authenticated Users --}}
-
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger">
+                        {{ $error }}
+                    </div>
+                @endforeach
+            @endif
+            
+            <div class="card-body">
                 <div class="col-md-6">
                     <form action="{{ route('user.profile.message', ['name' => request()->route('name')]) }}" method="POST">
                         @csrf
@@ -45,36 +38,28 @@
                                 placeholder="Leave a constructive message :)"
                             ></textarea>
                         </div>
-                        <button type="submit" class="btn btn-dark"><i class="fas fa-envelope"></i> Send Message</button>
+                        <button type="submit" class="btn btn-dark btn-sm"><i class="fas fa-envelope"></i> Send Message</button>
                     </form>
                 </div>
-
-            {{-- /Show The Message Form For Guests or Not Authenticated Users --}}
+            </div>
+            <form>
+                <button type="submit" class="btn btn-danger btn-sm report-button"><i class="fas fa-flag"></i> Report User</button>
+            </form>
 
         </div>
-
     </div>
-
-
-</div>
-
-
 @endguest
 
 @auth 
-
     <div class="container">
-
         <div class="alert alert-dark" role="alert">
             <h2 class="alert-heading">Sorry!</h2>
-            <hr>
+                <hr>
             <h3>You Cannot Send Private Saraha Messages to Yourself!</h3>
-            <hr>
+                <hr>
             <h3 class="mb-0">You Can Share This Link with Others to Know What They Say about You!</h3>
-            <hr>
+                <hr>
             <h3 id="public_profile">{{ route('guest.profile', ['name' => auth()->user()->name]) }}</h3>
           </div>          
-
     </div>
-
 @endauth
