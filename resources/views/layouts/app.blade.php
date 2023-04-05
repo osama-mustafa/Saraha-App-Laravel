@@ -21,16 +21,6 @@
                             <li class="nav-item">
                                 <a href="{{ route('guest.profile', ['name' => auth()->user()->name]) }}" class="nav-link text-white"><i class="fas fa-user-alt"></i> Public Profile</a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-cog"></i> Setting
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('edit.profile') }}">Edit Profile</a>
-                                    <a class="dropdown-item" href="{{ route('change.password') }}">Change Password</a>
-                                </div>
-                            </li>
-
                             @if (Auth::user()->is_admin)
                                 <li class="nav-item">
                                     <a href="{{ route('users') }}" class="nav-link text-white"><i class="fas fa-users"></i> Users</a>
@@ -74,7 +64,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('user.profile') }}">Messages</a>
+                                    <a class="dropdown-item" href="{{ route('edit.profile') }}">Edit Profile</a>
+                                    <a class="dropdown-item" href="{{ route('change.password') }}">Change Password</a>
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
