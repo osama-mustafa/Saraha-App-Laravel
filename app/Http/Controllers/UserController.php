@@ -51,7 +51,7 @@ class UserController extends Controller
         $user->email    = $validatedData['email'];
 
         if ($request->has('image')) {
-            $image = handleUploadImage($request, 'images');
+            $image = handleUploadImage($request);
             $user->image = $image;
         }
 

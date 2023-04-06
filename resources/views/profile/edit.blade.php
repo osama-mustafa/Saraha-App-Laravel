@@ -1,5 +1,6 @@
-@include('layouts.app')
+@extends('layouts.app')
 
+@section('content')
 <div class="container">
     <div class="col-sm-6">
 
@@ -46,11 +47,11 @@
 
                 @if (auth()->user()->image)
                     <div>
-                        <img class="avatar" src="{{ asset('images/') }} {{ auth()->user()->image }}" alt="avatar">
+                        <img class="avatar" src="{{ asset('storage/images') }}/{{ auth()->user()->image }}" alt="avatar">
                     </div>
                 @else
                     <div>
-                        <img class="avatar" src="{{ asset('images/profile.png') }}" alt="avatar">
+                        <img class="avatar" src="{{ asset('/images/profile.png') }}" alt="avatar">
                     </div>
                 @endif
 
@@ -63,4 +64,6 @@
         </div>
     </div>
 </div>
-</div>
+
+@endsection
+
