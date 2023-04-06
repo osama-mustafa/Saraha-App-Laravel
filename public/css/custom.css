@@ -13,3 +13,10 @@
     height: 40px;
     border-radius: 50%;
 }
+
+.big-avatar {
+    vertical-align: middle;
+    width: 150px;
+    height: 150px;
+    border-radius: 30%;
+}

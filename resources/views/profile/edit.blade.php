@@ -47,7 +47,7 @@
 
                 @if (auth()->user()->image)
                     <div>
-                        <img class="avatar" src="{{ asset('storage/images') }}/{{ auth()->user()->image }}" alt="avatar">
+                        <img class="big-avatar" src="{{ asset('storage/images') }}/{{ auth()->user()->image }}" alt="avatar">
                     </div>
                 @else
                     <div>
@@ -56,8 +56,8 @@
                 @endif
 
                 <div class="form-group">
-                    <label for="image">Upload Profile Image</label>
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image">
+                    <!-- <label for="image">Upload Profile Image</label> -->
+                    <input type="file" class="form-control-file mt-3" id="exampleFormControlFile1" name="image">
                 </div>
                 <button type="submit" class="btn btn-dark">Update</button>
             </form>

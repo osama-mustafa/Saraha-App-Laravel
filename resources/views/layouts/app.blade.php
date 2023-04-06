@@ -55,9 +55,21 @@
                                 </li>
                             @endif
                         @else
+
+                        <!-- Avatar -->
+                        @if (auth()->user()->image)
                             <div>
-                                <img class="avatar" src="{{ asset('images/profile.png') }}" alt="avatar">
+                                <img class="avatar" src="{{ asset('storage/images') }}/{{ auth()->user()->image }}" alt="avatar">
                             </div>
+                        @else
+                            <div>
+                                <img class="avatar" src="{{ asset('/images/profile.png') }}" alt="avatar">
+                            </div>
+                        @endif
+
+                            <!-- <div>
+                                <img class="avatar" src="{{ asset('images/profile.png') }}" alt="avatar">
+                            </div> -->
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
