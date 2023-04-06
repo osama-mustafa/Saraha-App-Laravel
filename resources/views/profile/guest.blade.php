@@ -21,9 +21,9 @@
             @unless ($user->is_blocked)
                 <div class="card">
 
-                    <div class="card-header">
-                        <h3>
-                            <i class="fas fa-envelope"></i> Leave a constructive message to <strong> {!! $user->name !!} </strong>
+                    <div class="card-header text-center">
+                        <h3 class="">
+                            <i class="fas fa-envelope"></i> Leave a constructive message to <strong>{!! $user->name !!}</strong>
                         </h3> 
                     </div>
 
@@ -41,12 +41,13 @@
                         @endforeach
                     @endif
                     
-                    <div class="card-body">
+                    <div class="container">
+                    <div class="card-body d-flex justify-content-center">
                         <div class="col-md-6">
                             <form action="{{ route('user.profile.message', ['name' => request()->route('name')]) }}" method="POST">
                                 @csrf
-                                <div class="form-group">
-                                    <label for="body">Message</label>
+                                <div class="form-group text-center">
+                                    <label for="body" class="">Message</label>
                                     <textarea 
                                         name="body" 
                                         id="message_body" 
@@ -56,9 +57,14 @@
                                         placeholder="Leave a constructive message :)"
                                     ></textarea>
                                 </div>
+                                <div class="form-group text-center">
                                 <button type="submit" class="btn btn-dark btn-sm"><i class="fas fa-envelope"></i> Send Message</button>
+
+                                </div>
                             </form>
                         </div>
+                    </div>
+
                     </div>
                     @if ($user->is_blocked)
                         <form>
