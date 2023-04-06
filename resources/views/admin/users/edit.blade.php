@@ -44,9 +44,9 @@
 
                     <!-- Profile image -->
 
-                    @if (auth()->user()->image)
+                    @if ($user->image)
                         <div>
-                            <img class="big-avatar mb-3" src="{{ asset('storage/images') }}/{{ auth()->user()->image }}" alt="avatar">
+                            <img class="big-avatar mb-3" src="{{ asset('storage/images') }}/{{ $user->image }}" alt="avatar">
                         </div>
                     @else
                         <div>
