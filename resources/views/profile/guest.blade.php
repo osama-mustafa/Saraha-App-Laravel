@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+
     @guest
 
         <!-- User Avatar -->
@@ -47,7 +48,6 @@
                             <form action="{{ route('user.profile.message', ['name' => request()->route('name')]) }}" method="POST">
                                 @csrf
                                 <div class="form-group text-center">
-                                    <label for="body" class="">Message</label>
                                     <textarea 
                                         name="body" 
                                         id="message_body" 
@@ -95,7 +95,7 @@
     @endguest
 
     @auth 
-        <div class="container">
+        <div class="container mt-5">
             <div class="alert alert-dark" role="alert">
                 <h2 class="alert-heading">Sorry!</h2>
                     <hr>
@@ -107,4 +107,5 @@
             </div>          
         </div>
     @endauth
+
 @endsection
