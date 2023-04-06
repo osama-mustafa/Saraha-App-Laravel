@@ -10,8 +10,8 @@
                         <img class="big-avatar img-fluid" src="{{ asset('storage/images') }}/{{ $user->image }}" alt="avatar">
                     </div>
                 @else
-                    <div class="col-md-6">
-                        <img class="big-avatar" src="{{ asset('/images/profile.png') }}" alt="avatar">
+                    <div class="col-md-6 text-center">
+                        <img class="big-avatar img-fluid" src="{{ asset('/images/profile.png') }}" alt="avatar">
                     </div>
                 @endif
             </div>

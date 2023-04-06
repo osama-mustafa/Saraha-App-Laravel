@@ -18,7 +18,7 @@ class MessageFactory extends Factory
     {
         return [
             'body' => $this->faker->sentence($nbWords = 7, $variableNbWords = true),
-            'user_id'      => $this->faker->numberBetween($min = 1, $max = 100)
+            'user_id' => $this->faker->numberBetween($min = 1, $max = 10)
         ];
     }
 }
