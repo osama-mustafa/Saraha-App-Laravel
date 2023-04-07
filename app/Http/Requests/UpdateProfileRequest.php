@@ -26,14 +26,15 @@ class UpdateProfileRequest extends FormRequest
     {
         return [
             'name'  => [
-                'required', 'min:5', 'max:255',
+                'required', 'max:255',
                 Rule::unique('users', 'name')->ignore($this->user->id)
             ],
             'email' => [
                 'required', 
                 Rule::unique('users', 'email')->ignore($this->user->id)
             ],
-            'image' => 'sometimes|mimes:jpeg,jpg,png,gif|max:2048'
+            'image' => 'sometimes|mimes:jpeg,jpg,png,gif|max:2048',
+            'password' => 'sometimes'
         ];
     }
 }

@@ -110,14 +110,17 @@ class UserController extends Controller
     public function updateUser(UpdateProfileRequest $request, User $user)
     {
         $validatedData  = $request->validated();
-        $user->name     = $validatedData['name'];
-        $user->email    = $validatedData['email'];
-        $user->save();
+
+        $user->update([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+        ]);
 
         if (!empty($request->input('password')))
         {
-            $user->password = Hash::make(trim($request->password));
-            $user->save();
+            $user->update([
+                'password' => Hash::make(trim($request->password))
+            ]);
         }
 
         return redirect()->back()->with([
@@ -152,8 +155,9 @@ class UserController extends Controller
     public function removeAdmin($id)
     {
         $user = User::find($id);
-        $user->is_admin = false;
-        $user->update();
+        $user->update([
+            'is_admin' => false
+        ]);
         return redirect()->back()->with([
             'admin_message' => "<b>{$user->name}</b> has been removed from admins"
         ]);
