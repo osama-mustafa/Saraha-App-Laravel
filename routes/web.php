@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MessageController;
+use Illuminate\Routing\RouteGroup;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,9 +44,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/change-password', [UserController::class, 'changePassword'])->name('change.password');
     Route::post('profile/{id}/update-password', [UserController::class, 'updatePassword'])->name('update.password');
 
-    // ROUTES FOR ADMIN
-    Route::middleware(['admin'])->group(function () {
     
+
+    // ROUTES FOR ADMIN
+
+    Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function() {
+
         // Show All Users
         Route::get('/users', [UserController::class, 'index'])->name('users');
 
@@ -73,8 +77,10 @@ Route::middleware('auth')->group(function () {
         // Block & Unblock users
         Route::post('/user/{user}/block', [UserController::class, 'block'])->name('block.admin');
         Route::post('/user/{user}/unblock', [UserController::class, 'unblock'])->name('unblock.admin');
-    });
 
+
+    });
+    
 });
 
 
