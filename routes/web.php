@@ -56,8 +56,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/deleted-messages', [MessageController::class, 'trashedMessages'])->name('trashed.messages');
 
         // Restore Deleted Message & Force Delete Message
-        Route::post('/user/{message_id}/restore', [MessageController::class, 'restoreDeletedMessages'])->name('restore.messages');
-        Route::delete('/user/{message_id}/forceDelete', [MessageController::class, 'deleteMessagesForever'])->name('force.delete.messages');        
+        Route::post('/user/{message_id}/restore', [MessageController::class, 'restore'])->name('restore.messages');
+        Route::delete('/user/{message_id}/forceDelete', [MessageController::class, 'deleteForever'])->name('force.delete.messages');        
 
         // Delete User
         Route::delete('/user/{user}/delete', [UserController::class, 'destroy'])->name('delete.user');

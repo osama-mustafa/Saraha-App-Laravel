@@ -8,12 +8,9 @@ use App\Models\User;
 
 class MessageController extends Controller
 {
- 
-    // Show All Messages In Admin Area
-
     public function index()
     {
-        $messages       = Message::paginate(10);
+        $messages       = Message::latest()->paginate(10);
         $users          = User::all();
 
         return view ('admin.messages.index')->with([
@@ -21,8 +18,6 @@ class MessageController extends Controller
             'users'     => $users
         ]);
     }
-
-    // Store Message
 
     public function store(StoreMessageRequest $request)
     {
@@ -34,12 +29,9 @@ class MessageController extends Controller
         ]);
 
         return redirect()->back()->with([
-            'message_sent' => 'Your message has been sent .. Thank you for your honesty',
+            'message_sent' => 'Your message has been sent, Thank you for your honesty',
         ]);
     }
-
-
-    // Delete Message
 
     public function destroy(Message $message)
     {
@@ -49,9 +41,6 @@ class MessageController extends Controller
         ]);
     }
 
-
-    // Show All Trashed Messages
-
     public function trashedMessages()
     {
         $messages  = Message::onlyTrashed()->paginate(8);
@@ -60,9 +49,7 @@ class MessageController extends Controller
         ]);
     }
 
-    // Restore Trashed Message
-
-    public function restoreDeletedMessages($id)
+    public function restore($id)
     {
         $message = Message::withTrashed()->where('id', $id);
         $message->restore();
@@ -71,16 +58,13 @@ class MessageController extends Controller
         ]);
     }
 
-    // Delete Messages Forever
-
-    public function deleteMessagesForever($id)
+    public function deleteForever($id)
     {
         $message = Message::withTrashed()->where('id', $id);
         $message->forceDelete();
         return redirect()->route('trashed.messages')->with([
             'message_deleted' => '<b>Message</b> has been deleted Forever!!'
         ]);
-
     }
 
 }
