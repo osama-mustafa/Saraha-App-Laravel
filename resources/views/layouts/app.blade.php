@@ -23,15 +23,15 @@
                             </li>
                             @if (Auth::user()->is_admin)
                                 <li class="nav-item">
-                                    <a href="{{ route('users') }}" class="nav-link text-white"><i class="fas fa-users"></i> Users</a>
+                                    <a href="{{ route('admin.users.index') }}" class="nav-link text-white"><i class="fas fa-users"></i> Users</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-cog"></i> Messages
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('messages') }}">All Messages</a>
-                                        <a class="dropdown-item" href="{{ route('trashed.messages') }}">Deleted Messages</a>
+                                        <a class="dropdown-item" href="{{ route('admin.messages.index') }}">All Messages</a>
+                                        <a class="dropdown-item" href="{{ route('admin.messages.trashed') }}">Deleted Messages</a>
                                     </div>
                                 </li>
                             @endif

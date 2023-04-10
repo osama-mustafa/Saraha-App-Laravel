@@ -27,8 +27,9 @@
                 </div>
             @endif
             <div class="card-body">
-                <form action="{{ route('update.user', $user->id) }}" method="POST">
+                <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
                     @csrf
+                    @method('PATCH')
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" name="name" class="form-control" value="{{ $user->name }}">

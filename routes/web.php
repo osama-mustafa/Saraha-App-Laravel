@@ -47,40 +47,28 @@ Route::middleware('auth')->group(function () {
     
 
     // ROUTES FOR ADMIN
+    Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'as' => 'admin.'], function() {
 
-    Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function() {
-
-        // Show All Users
-        Route::get('/users', [UserController::class, 'index'])->name('users');
-
-        // Show All Messages
-        Route::get('/messages', [MessageController::class, 'index'])->name('messages');
+        // Add Admin & Remove Admin
+        Route::post('/user/{id}/add-admin', [UserController::class, 'addAdmin'])->name('users.add.admin');
+        Route::post('/user/{id}/remove-admin', [UserController::class, 'removeAdmin'])->name('users.remove.admin');
+        
+        // Block & Unblock users
+        Route::post('/user/{user}/block', [UserController::class, 'block'])->name('users.block');
+        Route::post('/user/{user}/unblock', [UserController::class, 'unblock'])->name('users.unblock');
+        
+        // Restore Deleted Message & Force Delete Message
+        Route::post('/user/{message_id}/restore', [MessageController::class, 'restore'])->name('messages.restore');
+        Route::delete('/user/{message_id}/forceDelete', [MessageController::class, 'deleteForever'])->name('messages.force.delete'); 
 
         // Show All Trashed Messages
-        Route::get('/deleted-messages', [MessageController::class, 'trashedMessages'])->name('trashed.messages');
+        Route::get('/deleted-messages', [MessageController::class, 'trashedMessages'])->name('messages.trashed');
 
-        // Restore Deleted Message & Force Delete Message
-        Route::post('/user/{message_id}/restore', [MessageController::class, 'restore'])->name('restore.messages');
-        Route::delete('/user/{message_id}/forceDelete', [MessageController::class, 'deleteForever'])->name('force.delete.messages');        
-
-        // Delete User
-        Route::delete('/user/{user}/delete', [UserController::class, 'destroy'])->name('delete.user');
-
-        // Make User As Admin & Remove User From Admin
-        Route::post('/user/{id}/admin', [UserController::class, 'makeAdmin'])->name('make.admin');
-        Route::post('/user/{id}/notadmin', [UserController::class, 'removeAdmin'])->name('remove.admin');
-
-        // Edit User
-        Route::get('/user/{user}/edit', [UserController::class, 'edit'])->name('edit.user');
-        Route::post('/user/{user}/update', [UserController::class, 'update'])->name('update.user');
-
-        // Block & Unblock users
-        Route::post('/user/{user}/block', [UserController::class, 'block'])->name('block.admin');
-        Route::post('/user/{user}/unblock', [UserController::class, 'unblock'])->name('unblock.admin');
-
-
+        Route::resources([
+            'users'     => UserController::class,
+            'messages'  => MessageController::class
+        ]);
     });
-    
 });
 
 

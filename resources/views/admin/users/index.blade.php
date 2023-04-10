@@ -30,21 +30,21 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($users as $index => $user)
+            @foreach ($users as $user)
                 <tr>
-                    <th scope="row">{{ $index + 1 }}</th>
+                    <th scope="row">{{ $loop->iteration }}</th>
                     <td>
                        {{ $user->name }}
                     </td>
                     <td>{{ $user->messages->count() }}</td>
                     <td>
-                        <a href="{{ route('edit.user', $user->id) }}" class="btn btn-dark btn-sm">
+                        <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-dark btn-sm">
                             <i class="fa fa-user-edit"></i>
                             Edit
                         </a>
                     </td>
                     <td>
-                        <form action="{{ route('delete.user', $user->id) }}" method="POST">
+                        <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST">
                             @csrf 
                             @method('DELETE')
                             <button type="submit" class="btn btn-dark btn-sm">
@@ -57,7 +57,7 @@
                     {{-- Admin --}}
                     @if ($user->is_admin == true)
                         <td>
-                            <form action="{{ route('remove.admin', $user->id) }}" method="POST">
+                            <form action="{{ route('admin.users.remove.admin', $user->id) }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-dark btn-sm">
                                     <i class="fa fa-lock"></i>
@@ -69,11 +69,11 @@
 
                     @if ($user->is_admin == false)
                         <td>
-                            <form action="{{ route('make.admin', $user->id) }}" method="POST">
+                            <form action="{{ route('admin.users.add.admin', $user->id) }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-dark btn-sm">
                                     <i class="fa fa-lock-open"></i>
-                                    Make Admin
+                                    Add Admin
                                 </button>
                             </form>
                         </td>
@@ -82,7 +82,7 @@
                     {{-- Block --}}
                     @if ($user->is_blocked == true)
                         <td>
-                            <form action="{{ route('unblock.admin', $user->id) }}" method="POST">
+                            <form action="{{ route('admin.users.unblock', $user->id) }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-dark btn-sm">
                                     <i class="fa fa-user"></i>
@@ -94,7 +94,7 @@
 
                     @if ($user->is_blocked == false)
                         <td>
-                            <form action="{{ route('block.admin', $user->id) }}" method="POST">
+                            <form action="{{ route('admin.users.block', $user->id) }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-dark btn-sm">
                                     <i class="fa fa-user-slash"></i>

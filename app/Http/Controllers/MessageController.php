@@ -53,7 +53,7 @@ class MessageController extends Controller
     {
         $message = Message::withTrashed()->where('id', $id);
         $message->restore();
-        return redirect()->route('trashed.messages')->with([
+        return redirect()->route('admin.messages.trashed')->with([
             'message_restored' => '<b>Message</b> has been restored successfully!'
         ]);
     }
@@ -62,7 +62,7 @@ class MessageController extends Controller
     {
         $message = Message::withTrashed()->where('id', $id);
         $message->forceDelete();
-        return redirect()->route('trashed.messages')->with([
+        return redirect()->route('admin.messages.trashed')->with([
             'message_deleted' => '<b>Message</b> has been deleted Forever!!'
         ]);
     }

@@ -37,7 +37,7 @@
                             </div>
                             <div class="card-body text-white">
                                 <h4 class="card-title">
-                                    <a href="{{ route('users') }}" class="text-white">
+                                    <a href="{{ route('admin.users.index') }}" class="text-white">
                                         {{ $users->count() }} </i>
                                     </a>
                                 </h4>
@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="card-body text-white">
                                     <h4 class="card-title">
-                                        <a href="{{ route('messages') }}" class="text-white">
+                                        <a href="{{ route('admin.messages.index') }}" class="text-white">
                                             {{ $messages->count() }} </i>
                                         </a>
                                     </h4>

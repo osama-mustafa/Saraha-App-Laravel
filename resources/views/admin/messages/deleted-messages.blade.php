@@ -32,10 +32,10 @@
                 <tr>
                     <td style="width: 25%">{{ $message->body }}</td>
                     <td style="width: 25%">
-                        <a href="{{ route('edit.user', $message->user_id) }}">{{ $message->user->name }}</a>
+                        <a href="{{ route('admin.users.edit', $message->user_id) }}">{{ $message->user->name }}</a>
                     </td>
                     <td>
-                        <form action="{{ route('restore.messages', $message->id) }}" method="POST">
+                        <form action="{{ route('admin.messages.restore', $message->id) }}" method="POST">
                             @csrf
                             <button type="submit" class="btn btn-dark btn-sm">
                                 <i class="fas fa-trash-restore"></i>
@@ -44,7 +44,7 @@
                         </form>
                     </td>
                     <td>
-                        <form action="{{ route('force.delete.messages', $message->id) }}" class="mb-3" method="POST">
+                        <form action="{{ route('admin.messages.force.delete', $message->id) }}" class="mb-3" method="POST">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-dark ml-3 btn-sm"><i class="fas fa-trash"></i> Delete</button>
