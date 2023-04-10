@@ -11,10 +11,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-
-    // Public profile for each user to receive private messages 
-
-    public function guest($name)
+    public function publicProfile($name)
     {
         $user         = User::where('name', $name)->firstOrFail();
         $name         = request()->route('name');
@@ -25,8 +22,6 @@ class UserController extends Controller
 
     }
 
-    // Show All Users In Admin Area
-
     public function index()
     {
         $users      = User::paginate(10);
@@ -35,14 +30,10 @@ class UserController extends Controller
         ]);
     }
 
-    // Edit profile of User
-
     public function editProfile()
     {
         return view('profile.edit');
     }
-
-    // Update profile
 
     public function updateProfile(UpdateProfileRequest $request, User $user)
     {
@@ -62,14 +53,10 @@ class UserController extends Controller
         ]);
     }
 
-    // Change Password 
-
     public function changePassword()
     {
         return view('profile.change-password');
     }
-
-    // Update Password 
 
     public function updatePassword(UpdatePasswordRequest $request)
     {
@@ -88,29 +75,21 @@ class UserController extends Controller
         }
     }
 
-    // Show User With Messages Recieved
-
     public function show()
     {
         return view('profile.user');
     }
  
-    // Edit User By Admin
-
-    public function editUser(User $user)
+    public function edit(User $user)
     {
         return view ('admin.users.edit')->with([
             'user'      => $user,
         ]);
     }
 
-
-    // Update User By Admin
-
-    public function updateUser(UpdateProfileRequest $request, User $user)
+    public function update(UpdateProfileRequest $request, User $user)
     {
         $validatedData  = $request->validated();
-
         $user->update([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
@@ -128,8 +107,6 @@ class UserController extends Controller
         ]);
     }
 
-    // Delete User
-
     public function destroy(User $user)
     {
         $user->delete();
@@ -137,8 +114,6 @@ class UserController extends Controller
             'user_deleted' => 'User has been deleted'
         ]);
     }
-
-    // Assign User As Admin
 
     public function makeAdmin($id)
     {
@@ -149,8 +124,6 @@ class UserController extends Controller
             'admin_message' => "<b>{$user->name}</b> is added to Admins"
         ]);
     }
-
-    // Remove User From Admins
 
     public function removeAdmin($id)
     {
@@ -163,8 +136,6 @@ class UserController extends Controller
         ]);
     }
 
-    // Block User
-
     public function block(User $user)
     {
         $user->is_blocked = true;
@@ -173,8 +144,6 @@ class UserController extends Controller
             'admin_message' => "<b>{$user->name}</b> has been blocked, and will not receive any private messages"
         ]);
     }
-
-    // Unblock User
 
     public function unblock(User $user)
     {

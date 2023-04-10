@@ -67,8 +67,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/user/{id}/notadmin', [UserController::class, 'removeAdmin'])->name('remove.admin');
 
         // Edit User
-        Route::get('/user/{user}/edit', [UserController::class, 'editUser'])->name('edit.user');
-        Route::post('/user/{user}/update', [UserController::class, 'updateUser'])->name('update.user');
+        Route::get('/user/{user}/edit', [UserController::class, 'edit'])->name('edit.user');
+        Route::post('/user/{user}/update', [UserController::class, 'update'])->name('update.user');
 
         // Block & Unblock users
         Route::post('/user/{user}/block', [UserController::class, 'block'])->name('block.admin');
@@ -79,7 +79,7 @@ Route::middleware('auth')->group(function () {
 
 
 // Profile of Users for Guests
-Route::get('/profile/{name}', [UserController::class, 'guest'])->name('guest.profile');
+Route::get('/profile/{name}', [UserController::class, 'publicProfile'])->name('guest.profile');
 
 // Send Message to Any User (For Guests Only)
 Route::post('/profile/{name}/message', [MessageController::class, 'store'])->name('user.profile.message');

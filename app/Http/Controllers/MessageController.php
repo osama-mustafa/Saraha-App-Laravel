@@ -66,5 +66,4 @@ class MessageController extends Controller
             'message_deleted' => '<b>Message</b> has been deleted Forever!!'
         ]);
     }
-
 }
