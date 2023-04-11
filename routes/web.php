@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Routing\RouteGroup;
 
 /*
@@ -37,12 +38,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/user/{message}/message/delete', [MessageController::class, 'destroy'])->name('user.delete.message');
 
     // Edit & Update User
-    Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('edit.profile');
-    Route::post('/profile/{user}/update', [UserController::class, 'updateProfile'])->name('update.profile');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('edit.profile');
+    Route::post('/profile/{user}/update', [ProfileController::class, 'update'])->name('update.profile');
 
     // Change Password of User
-    Route::get('/profile/change-password', [UserController::class, 'changePassword'])->name('change.password');
-    Route::post('profile/{id}/update-password', [UserController::class, 'updatePassword'])->name('update.password');
+    Route::get('/profile/change-password', [ProfileController::class, 'changePassword'])->name('change.password');
+    Route::post('profile/{id}/update-password', [ProfileController::class, 'updatePassword'])->name('update.password');
 
     
 
@@ -73,7 +74,7 @@ Route::middleware('auth')->group(function () {
 
 
 // Profile of Users for Guests
-Route::get('/profile/{name}', [UserController::class, 'publicProfile'])->name('guest.profile');
+Route::get('/profile/{name}', [ProfileController::class, 'publicProfile'])->name('guest.profile');
 
 // Send Message to Any User (For Guests Only)
 Route::post('/profile/{name}/message', [MessageController::class, 'store'])->name('user.profile.message');
