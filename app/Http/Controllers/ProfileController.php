@@ -7,10 +7,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Requests\UpdatePasswordRequest;
+use App\Traits\ImageUpload;
 
 class ProfileController extends Controller
 {
 
+    use ImageUpload;
 
     public function publicProfile($name)
     {
