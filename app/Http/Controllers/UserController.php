@@ -30,6 +30,11 @@ class UserController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        return view('admin.users.create');
+    }
+
     public function editProfile()
     {
         return view('profile.edit');
