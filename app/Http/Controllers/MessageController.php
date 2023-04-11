@@ -13,7 +13,7 @@ class MessageController extends Controller
         $messages       = Message::latest()->paginate(10);
         $users          = User::all();
 
-        return view ('admin.messages.index')->with([
+        return view('admin.messages.index')->with([
             'messages'  => $messages,
             'users'     => $users
         ]);
@@ -28,7 +28,7 @@ class MessageController extends Controller
             'user_id' => $userId
         ]);
 
-        return redirect()->back()->with([
+        return back()->with([
             'message_sent' => 'Your message has been sent, Thank you for your honesty',
         ]);
     }
@@ -36,7 +36,7 @@ class MessageController extends Controller
     public function destroy(Message $message)
     {
         $message->delete();
-        return redirect()->back()->with([
+        return back()->with([
            'message_deleted' => '<b>Message</b> has been deleted',
         ]);
     }
