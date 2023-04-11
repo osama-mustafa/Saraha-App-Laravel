@@ -21,13 +21,8 @@ class MessageController extends Controller
 
     public function store(StoreMessageRequest $request)
     {
-        $userId = User::where('name', request()->route('name'))->first()->id;
-        $validatedData = $request->validated();
-        Message::create([
-            'body' => $validatedData['body'],
-            'user_id' => $userId
-        ]);
-
+        $user = User::where('name', request()->route('name'))->first();
+        $user->messages()->create($request->validated());
         return back()->with([
             'message_sent' => 'Your message has been sent, Thank you for your honesty',
         ]);
