@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\User;
@@ -35,6 +36,21 @@ class UserController extends Controller
         return view('admin.users.create');
     }
 
+    public function store(StoreUserRequest $request)
+    {
+        $validatedData = $request->validated();
+        $image = handleUploadImage($request);
+        User::create([
+            'name'      => $validatedData['name'],
+            'email'     => $validatedData['email'],
+            'password'  => Hash::make(trim($validatedData['password'])),
+            'image'     => $image,
+        ]);
+        return back()->with([
+            'user_created' => "User has been created successfully!"
+        ]);
+    }
+
     public function editProfile()
     {
         return view('profile.edit');
@@ -53,7 +69,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->back()->with([
+        return back()->with([
             'profile_updated' => '<b>Your profile</b> has been updated successfully!'
         ]);
     }
@@ -87,7 +103,7 @@ class UserController extends Controller
  
     public function edit(User $user)
     {
-        return view ('admin.users.edit')->with([
+        return view('admin.users.edit')->with([
             'user'      => $user,
         ]);
     }
@@ -107,7 +123,7 @@ class UserController extends Controller
             ]);
         }
 
-        return redirect()->back()->with([
+        return back()->with([
             'profile_updated' => "Profile of <b>{$user->name}</b> has been updated successfully!"
         ]);
     }
@@ -115,7 +131,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->back()->with([
+        return back()->with([
             'user_deleted' => 'User has been deleted'
         ]);
     }
@@ -125,7 +141,7 @@ class UserController extends Controller
         $user = User::find($id);
         $user->is_admin = true;
         $user->update();
-        return redirect()->back()->with([
+        return back()->with([
             'admin_message' => "<b>{$user->name}</b> is added to Admins"
         ]);
     }
@@ -136,7 +152,7 @@ class UserController extends Controller
         $user->update([
             'is_admin' => false
         ]);
-        return redirect()->back()->with([
+        return back()->with([
             'admin_message' => "<b>{$user->name}</b> has been removed from admins"
         ]);
     }
@@ -145,7 +161,7 @@ class UserController extends Controller
     {
         $user->is_blocked = true;
         $user->save();
-        return redirect()->back()->with([
+        return back()->with([
             'admin_message' => "<b>{$user->name}</b> has been blocked, and will not receive any private messages"
         ]);
     }
@@ -154,7 +170,7 @@ class UserController extends Controller
     {
         $user->is_blocked = false;
         $user->save();
-        return redirect()->back()->with([
+        return back()->with([
             'admin_message' => "<b>{$user->name}</b> has been unblocked, and can receive private messages"
         ]);
     }

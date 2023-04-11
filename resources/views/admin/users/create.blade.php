@@ -21,22 +21,36 @@
                     </div>
             @endif
 
-            @if (session('profile_updated'))
+            @if (session('user_created'))
                 <div class="alert alert-success">
-                    {!! session('profile_updated') !!}
+                    {!! session('user_created') !!}
                 </div>
             @endif
             <div class="card-body">
-                <form action="{{ route('admin.users.store') }}" method="POST">
+                <form action="{{ route('admin.users.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="name">Username</label>
-                        <input type="text" name="name" class="form-control" placeholder="Enter new username" required>
+                        <input 
+                            type="text" 
+                            name="name"
+                            class="form-control" 
+                            placeholder="Enter new username"
+                            value="{{ old('name') }}"
+                            required
+                        >
                     </div>
 
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" name="email" class="form-control" placeholder="Enter new email" required>
+                        <input 
+                            type="email"
+                            name="email"
+                            class="form-control"
+                            placeholder="Enter new email"
+                            value="{{ old('email') }}"
+                            required
+                        >
                     </div>
 
                     <div class="form-group">
