@@ -27,6 +27,7 @@
                                         <i class="fas fas fa-users"></i> Users
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('admin.users.index') }}">All Users</a>
                                         <a class="dropdown-item" href="{{ route('admin.users.create') }}">Create</a>
                                     </div>
                                 </li>

@@ -33,10 +33,16 @@ use Illuminate\Support\Facades\Storage;
     }
 
     if (! function_exists('handleUploadImage')) {
-        function handleUploadImage(Request $request, $path = 'public/images') {
+        function handleUploadImage(Request $request, $inputName = 'image', $path = 'public/images') {
             try {
+                
+                // Validate image
+                $request->validate([
+                    $inputName => ['required', 'image', 'mimes:jpeg,png,jpg,gif|max:2048'],
+                ]);
+
                 // Create unique name for the image
-                $file  = $request->image;
+                $file  = $request->$inputName;
                 $name  =  $file->hashName();
 
                 // Save image to specific directory
