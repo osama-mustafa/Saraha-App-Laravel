@@ -23,7 +23,7 @@ class AuthorizationTest extends TestCase
 
     public function test_non_admin_user_cannot_access_messages_page_in_admin_dashboard()
     {
-        $response = $this->actingAs($this->user)->get(route("messages"));
+        $response = $this->actingAs($this->user)->get(route("admin.messages.index"));
         $response->assertStatus(403);
         $response->assertSeeText("You Are Not Authorized To Access This Page");
     }
@@ -37,14 +37,14 @@ class AuthorizationTest extends TestCase
 
     public function test_non_admin_user_cannot_access_users_page_in_admin_dashboard()
     {
-        $response = $this->actingAs($this->user)->get(route("users"));
+        $response = $this->actingAs($this->user)->get(route("admin.users.index"));
         $response->assertStatus(403);
         $response->assertSeeText("You Are Not Authorized To Access This Page");
     }
 
     public function test_admin_can_access_users_page_in_admin_dashboard()
     {
-        $response = $this->actingAs($this->admin)->get(route("users"));
+        $response = $this->actingAs($this->admin)->get(route("admin.users.index"));
         $response->assertStatus(200);
         $response->assertViewIs("admin.users.index");
         $response->assertSeeText("Users");
@@ -52,7 +52,7 @@ class AuthorizationTest extends TestCase
 
     public function test_admin_can_access_messages_page_in_admin_dashboard()
     {
-        $response = $this->actingAs($this->admin)->get(route("messages"));
+        $response = $this->actingAs($this->admin)->get(route("admin.messages.index"));
         $response->assertStatus(200);
         $response->assertViewIs("admin.messages.index");
         $response->assertSeeText("Messages");
