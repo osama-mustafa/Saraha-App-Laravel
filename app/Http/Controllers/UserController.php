@@ -98,7 +98,9 @@ class UserController extends Controller
 
     public function show()
     {
-        return view('profile.user');
+        $user = User::with('messages')->find(Auth::id());
+        $messages = $user->messages()->latest()->get();
+        return view('profile.user')->with(['messages' => $messages]);
     }
  
     public function edit(User $user)

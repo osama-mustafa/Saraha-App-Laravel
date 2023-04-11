@@ -8,7 +8,7 @@
             <div class="card-header">
                 <h3>Welcome   
                     <span class="font-weight-bold">{!! auth()->user()->name !!}</span>  
-                    You have {{ auth()->user()->messages->count() }} {{ Str::plural('message', auth()->user()->messages->count()) }} <i class="fas fa-envelope fa-sm"></i>
+                    You have {{ $messages->count() }} {{ Str::plural('message', $messages->count()) }} <i class="fas fa-envelope fa-sm"></i>
                 </h3>
             </div>
         @endauth
@@ -70,8 +70,8 @@
             @auth 
                 {{-- <h5 class="card-title">Your Messages</i></h5> --}}
                 <div class="row">
-                    @if (auth()->user()->messages->count() > 0)
-                        @foreach (auth()->user()->messages as $message)
+                    @if ($messages->count() > 0)
+                        @foreach ($messages as $message)
                         <div class="col-md-6">
                             <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
                                 {{-- <div class="card-header">Message</div> --}}
