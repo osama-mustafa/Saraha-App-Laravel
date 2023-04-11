@@ -2,9 +2,7 @@
 
 use App\Models\Message;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 
     if (!function_exists('isUserEnterOldPasswordCorrectly')) {
         function isUserEnterOldPasswordCorrectly($passwordFromRequest, $passwordInDatabase) {
@@ -29,29 +27,6 @@ use Illuminate\Support\Facades\Storage;
                 'body' => $body,
                 'user_id' => $user_id
             ]);
-        }
-    }
-
-    if (! function_exists('handleUploadImage')) {
-        function handleUploadImage(Request $request, $inputName = 'image', $path = 'public/images') {
-            try {
-                
-                // Validate image
-                $request->validate([
-                    $inputName => ['required', 'image', 'mimes:jpeg,png,jpg,gif|max:2048'],
-                ]);
-
-                // Create unique name for the image
-                $file  = $request->$inputName;
-                $name  =  $file->hashName();
-
-                // Save image to specific directory
-                $path = Storage::putFileAs($path, $file, $name);
-                return $name;
-
-            } catch (\Throwable $th) {
-                return $th->getMessage();
-            }
         }
     }
 

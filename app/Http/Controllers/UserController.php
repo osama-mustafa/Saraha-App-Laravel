@@ -6,12 +6,16 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\User;
+use App\Traits\ImageUpload;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 
 class UserController extends Controller
 {
+
+    use ImageUpload;
+
     public function publicProfile($name)
     {
         $user         = User::where('name', $name)->firstOrFail();
@@ -39,7 +43,7 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $validatedData = $request->validated();
-        $image = handleUploadImage($request);
+        $image = $this->handleUploadImage($request);
         User::create([
             'name'      => $validatedData['name'],
             'email'     => $validatedData['email'],
@@ -63,7 +67,7 @@ class UserController extends Controller
         $user->email    = $validatedData['email'];
 
         if ($request->has('image')) {
-            $image = handleUploadImage($request);
+            $image = $this->handleUploadImage($request);
             $user->image = $image;
         }
 
